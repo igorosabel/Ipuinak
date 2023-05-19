@@ -1,0 +1,47 @@
+<mat-toolbar color="primary">
+    <span class="header-title">Ipuinak</span>
+    <button mat-icon-button
+            (click)="changeEdit()">
+        <mat-icon *ngIf="!edit">settings</mat-icon>
+        <mat-icon *ngIf="edit">close</mat-icon>
+    </button>
+</mat-toolbar>
+
+<mat-card *ngFor="let tale of tales$ | async"
+          class="tale">
+    <mat-card-header>
+        <mat-card-title>{{tale.name}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="row"
+             [ngClass]="{'row-end': tale.lastBookmark === null}">
+            <button mat-raised-button
+                    color="primary"
+                    *ngIf="tale.lastBookmark">
+                <mat-icon>bookmark_border</mat-icon>
+                Continuar
+                <span class="bookmark-date">({{tale.lastBookmark.createdAt}})</span>
+            </button>
+            <button mat-fab
+                    color="primary"
+                    [routerLink]="['/tale', tale.id]"
+                    *ngIf="!edit">
+                <mat-icon>navigate_next</mat-icon>
+            </button>
+            <button mat-fab
+                    color="primary"
+                    [routerLink]="['/edit', tale.id]"
+                    *ngIf="edit">
+                <mat-icon>edit</mat-icon>
+            </button>
+        </div>
+    </mat-card-content>
+</mat-card>
+
+<button mat-fab
+        color="primary"
+        class="fab-button"
+        routerLink="/new"
+        *ngIf="edit">
+    <mat-icon>add</mat-icon>
+</button>

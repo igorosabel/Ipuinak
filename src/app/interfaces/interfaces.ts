@@ -1,3 +1,18 @@
+export interface DialogField {
+  title: string;
+  type: string;
+  value: string;
+  hint?: string;
+}
+
+export interface DialogOptions {
+  title: string;
+  content: string;
+  fields?: DialogField[];
+  ok: string;
+  cancel?: string;
+}
+
 export interface DialogInterface {
   id: number | null;
   idCharacter: number | null;
@@ -6,33 +21,51 @@ export interface DialogInterface {
 }
 
 export interface PageInterface {
-  id: number;
-  pageOrder: number;
+  id: number | null;
+  pageOrder: number | null;
   hasImage: boolean;
   preloadImage: boolean;
-  bgColor: string;
-  animationIn: number;
-  animationOut: number;
+  bgColor: string | null;
+  animationIn: number | null;
+  animationOut: number | null;
   hasOptions: boolean;
-  nextPage: number;
+  nextPage: number | null;
   dialogs: DialogInterface[];
 }
 
 export interface CharacterInterface {
-  id: number;
-  name: string;
+  id: number | null;
+  name: string | null;
   hasImage: boolean;
-  color: string;
+  color: string | null;
+}
+
+export interface BookmarkInterface {
+  id: number | null;
+  idPage: number | null;
+  idDialog: number | null;
+  comment: string | null;
+  createdAt: string | null;
 }
 
 export interface TaleInterface {
-  id: number;
-  name: string;
-  createdAt: string;
+  id: number | null;
+  name: string | null;
+  createdAt: string | null;
   pages: PageInterface[];
   characters: CharacterInterface[];
+  lastBookmark: BookmarkInterface | null;
 }
 
 export interface TalesResult {
   list: TaleInterface[];
+}
+
+export interface StatusResult {
+  status: string;
+}
+
+export interface StatusIdResult {
+  status: string;
+  id: number;
 }

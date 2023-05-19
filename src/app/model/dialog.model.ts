@@ -1,5 +1,5 @@
+import { urldecode, urlencode } from '@osumi/tools';
 import { DialogInterface } from 'src/app/interfaces/interfaces';
-import { Utils } from 'src/app/shared/utils.class';
 
 export class Dialog {
   constructor(
@@ -13,7 +13,7 @@ export class Dialog {
     this.id = d.id;
     this.idCharacter = d.idCharacter;
     this.dialogOrder = d.dialogOrder;
-    this.content = Utils.urldecode(d.content);
+    this.content = urldecode(d.content);
 
     return this;
   }
@@ -23,7 +23,7 @@ export class Dialog {
       id: this.id,
       idCharacter: this.idCharacter,
       dialogOrder: this.dialogOrder,
-      content: Utils.urlencode(this.content),
+      content: urlencode(this.content),
     };
   }
 }

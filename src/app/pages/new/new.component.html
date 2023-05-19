@@ -1,0 +1,21 @@
+<mat-toolbar color="primary">
+    <button mat-icon-button
+            routerLink="/">
+        <mat-icon>navigate_before</mat-icon>
+    </button>
+    <span class="header-title">{{tale.name}}</span>
+</mat-toolbar>
+
+<div class="name-row">
+    <mat-form-field appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input matInput
+               placeholder="Nombre"
+               [(ngModel)]="tale.name"
+               #name>
+    </mat-form-field>
+    <button mat-icon-button
+            (click)="saveTale()">
+        <mat-icon>save</mat-icon>
+    </button>
+</div>

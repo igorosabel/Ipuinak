@@ -1,0 +1,12 @@
+.tale {
+    margin: 16px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+
+    &.row-end {
+        justify-content: flex-end;
+    }
+}

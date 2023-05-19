@@ -1,4 +1,26 @@
-/* You can add global styles to this file, and also import other style files */
+html,
+body {
+    height: 100%;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.header-title {
+    flex: 1;
+}
+
+.fab-button {
+    position: absolute !important;
+    bottom: 16px;
+    right: 16px;
+    z-index: 10;
+}
+
+.name-row {
+    padding: 16px;
+    display: flex;
+    flex-direction: row;
+}
