@@ -15,6 +15,16 @@ export class Page {
     public dialogs: Dialog[] = []
   ) {}
 
+  get bgColorHash(): string {
+    if (this.bgColor === null) {
+      return '#fff';
+    }
+    if (this.bgColor.indexOf('#') === -1) {
+      return '#' + this.bgColor;
+    }
+    return this.bgColor;
+  }
+
   fromInterface(p: PageInterface): Page {
     this.id = p.id;
     this.pageOrder = p.pageOrder;

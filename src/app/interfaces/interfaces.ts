@@ -61,6 +61,11 @@ export interface TalesResult {
   list: TaleInterface[];
 }
 
+export interface TaleResult {
+  status: string;
+  tale: TaleInterface;
+}
+
 export interface StatusResult {
   status: string;
 }
@@ -68,4 +73,9 @@ export interface StatusResult {
 export interface StatusIdResult {
   status: string;
   id: number;
+}
+
+export interface AnimationOption {
+  id: number;
+  name: string;
 }

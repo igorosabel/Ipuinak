@@ -1,0 +1,120 @@
+<div class="modal-bg"
+     [ngClass]="{'show': show}">
+    <mat-card class="modal-box">
+        <mat-card-header>
+            <mat-card-title>
+                <div class="modal-title">
+                    <span>Página {{page.id !== null ? page.pageOrder : 'nueva'}}</span>
+                    <button mat-icon-button
+                            (click)="close()">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </div>
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-tab-group>
+                <mat-tab label="General">
+                    <div class="image"
+                         [ngStyle]="{'background-color': page.bgColorHash}">
+                        <button mat-raised-button
+                                color="primary"
+                                (click)="addImage()">
+                            <mat-icon>add_a_photo</mat-icon>
+                            Cambiar imagen
+                        </button>
+                        <input type="file"
+                               name="image-file"
+                               id="image-file"
+                               accept="image/png, image/gif, image/jpeg"
+                               (change)="onImageChange($event)">
+                        <img *ngIf="page.hasImage"
+                             [src]="image">
+                    </div>
+                    <div class="general-controls">
+                        <mat-form-field>
+                            <mat-label>Color</mat-label>
+                            <input matInput
+                                   placeholder="Color de fondo"
+                                   type="color"
+                                   [(ngModel)]="page.bgColor">
+                            <span matTextPrefix>
+                                <mat-icon>palette</mat-icon>
+                            </span>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Animación entrada</mat-label>
+                            <mat-select [ngModel]="page.animationIn">
+                                <mat-option *ngFor="let option of animationOptionsIn"
+                                            [value]="option.id">
+                                    {{option.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Animación salida</mat-label>
+                            <mat-select [ngModel]="page.animationOut">
+                                <mat-option *ngFor="let option of animationOptionsOut"
+                                            [value]="option.id">
+                                    {{option.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <div class="form-field">
+                            <mat-slide-toggle [(ngModel)]="page.preloadImage">Precarga</mat-slide-toggle>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Diálogos">
+                    <div class="dialog-list">
+                        <div *ngFor="let dialog of page.dialogs"
+                             class="dialog-row">
+                            <mat-form-field>
+                                <mat-label>Personaje</mat-label>
+                                <mat-select [ngModel]="dialog.idCharacter">
+                                    <mat-option *ngFor="let option of tale.characters"
+                                                [value]="option.id">
+                                        {{option.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field class="dialog-text">
+                                <mat-label>Texto</mat-label>
+                                <input matInput
+                                       placeholder="Texto"
+                                       [(ngModel)]="dialog.content">
+                            </mat-form-field>
+                            <button mat-icon-button>
+                                <mat-icon>save</mat-icon>
+                            </button>
+                            <button mat-icon-button>
+                                <mat-icon>close</mat-icon>
+                            </button>
+                        </div>
+                        <div class="dialog-options">
+                            <button mat-raised-button
+                                    color="primary"
+                                    (click)="addDialog()">
+                                <mat-icon>add</mat-icon>
+                                Nuevo diálogo
+                            </button>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Siguiente página"> Content 3 </mat-tab>
+            </mat-tab-group>
+        </mat-card-content>
+        <mat-card-actions class="actions-between">
+            <button mat-raised-button
+                    color="warn">
+                <mat-icon>delete_forever</mat-icon>
+                Borrar página
+            </button>
+            <button mat-raised-button
+                    color="primary">
+                <mat-icon>save</mat-icon>
+                Guardar página
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</div>

@@ -1,1 +1,41 @@
-<p>edit works!</p>
+<mat-toolbar color="primary">
+    <button mat-icon-button
+            routerLink="/">
+        <mat-icon>navigate_before</mat-icon>
+    </button>
+    <span class="header-title">{{tale.name}}</span>
+</mat-toolbar>
+
+<div class="name-row">
+    <mat-form-field>
+        <mat-label>Nombre</mat-label>
+        <input matInput
+               placeholder="Nombre"
+               [(ngModel)]="tale.name"
+               #name>
+    </mat-form-field>
+    <button mat-icon-button
+            (click)="saveTale()">
+        <mat-icon>save</mat-icon>
+    </button>
+</div>
+
+<mat-tab-group [(selectedIndex)]="selectedTab">
+    <mat-tab label="Páginas">
+        <div class="tab-content">
+            <div class="no-data"
+                 *ngIf="tale.pages.length === 0">Todavía no hay ninguna página en este cuento. ¡Añade la primera!</div>
+        </div>
+    </mat-tab>
+    <mat-tab label="Personajes"> Content 2 </mat-tab>
+</mat-tab-group>
+
+<button mat-fab
+        color="primary"
+        class="fab-button"
+        (click)="add()">
+    <mat-icon>add</mat-icon>
+</button>
+
+<app-page-detail #pageDetail></app-page-detail>
+<app-character-detail></app-character-detail>

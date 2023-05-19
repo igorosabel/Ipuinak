@@ -24,3 +24,59 @@ body {
     display: flex;
     flex-direction: row;
 }
+
+.tab-content {
+    padding: 16px;
+}
+
+.modal-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    &.show {
+        display: flex;
+    }
+
+    .modal-box {
+        width: 90%;
+
+        .modal-title {
+            display: flex;
+            height: 48px;
+            align-items: center;
+
+            span {
+                flex: 1;
+            }
+        }
+
+        .actions-between {
+            justify-content: space-between;
+        }
+    }
+}
+
+@media screen and (min-width: 900px) {
+    .modal-bg {
+        .modal-box {
+            width: 60%;
+        }
+    }
+}
+
+.form-field {
+    display: inline-block;
+    padding: 16px;
+    border: 1px solid #9e9e9e;
+    border-radius: 4px;
+    height: 56px;
+    box-sizing: border-box;
+}

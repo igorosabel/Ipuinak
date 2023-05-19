@@ -4,6 +4,7 @@ import { Observable, map } from 'rxjs';
 import {
   StatusIdResult,
   TaleInterface,
+  TaleResult,
   TalesResult,
 } from 'src/app/interfaces/interfaces';
 import { Tale } from 'src/app/model/tale.model';
@@ -31,5 +32,15 @@ export class ApiService {
       `${environment.apiUrl}/save-tale`,
       tale
     );
+  }
+
+  getTale(id: number): Observable<Tale> {
+    return this.http
+      .post<TaleResult>(`${environment.apiUrl}/get-tale`, { id })
+      .pipe(
+        map((resp: TaleResult): Tale => {
+          return this.cms.getTale(resp.tale);
+        })
+      );
   }
 }
