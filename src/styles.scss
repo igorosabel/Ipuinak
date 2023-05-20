@@ -61,6 +61,10 @@ body {
         .actions-between {
             justify-content: space-between;
         }
+
+        .actions-end {
+            justify-content: flex-end;
+        }
     }
 }
 

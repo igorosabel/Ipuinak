@@ -1,0 +1,40 @@
+.image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 16px;
+    padding: 16px;
+
+    button {
+        margin-bottom: 16px;
+    }
+
+    #character-file {
+        display: none;
+    }
+
+    img {
+        max-height: 200px;
+    }
+}
+
+.general-controls {
+    display: flex;
+    flex-direction: column;
+    margin-top: 16px;
+
+    &>* {
+        margin: 0 8px;
+    }
+
+    .wide {
+        flex: 1;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    .general-controls {
+        flex-direction: row;
+        justify-content: space-around;
+    }
+}

@@ -1,9 +1,15 @@
-import { DialogInterface, PageInterface } from 'src/app/interfaces/interfaces';
+import {
+  DialogInterface,
+  OptionInterface,
+  PageInterface,
+} from 'src/app/interfaces/interfaces';
 import { Dialog } from 'src/app/model/dialog.model';
+import { Option } from 'src/app/model/option.model';
 
 export class Page {
   constructor(
     public id: number | null = null,
+    public idTale: number | null = null,
     public pageOrder: number | null = null,
     public hasImage: boolean = false,
     public preloadImage: boolean = false,
@@ -12,7 +18,8 @@ export class Page {
     public animationOut: number | null = null,
     public hasOptions: boolean = false,
     public nextPage: number | null = null,
-    public dialogs: Dialog[] = []
+    public dialogs: Dialog[] = [],
+    public options: Option[] = []
   ) {}
 
   get bgColorHash(): string {
@@ -27,6 +34,7 @@ export class Page {
 
   fromInterface(p: PageInterface): Page {
     this.id = p.id;
+    this.idTale = p.idTale;
     this.pageOrder = p.pageOrder;
     this.hasImage = p.hasImage;
     this.preloadImage = p.preloadImage;
@@ -38,6 +46,9 @@ export class Page {
     this.dialogs = p.dialogs.map((d: DialogInterface): Dialog => {
       return new Dialog().fromInterface(d);
     });
+    this.options = p.options.map((o: OptionInterface): Option => {
+      return new Option().fromInterface(o);
+    });
 
     return this;
   }
@@ -45,6 +56,7 @@ export class Page {
   toInterface(): PageInterface {
     return {
       id: this.id,
+      idTale: this.idTale,
       pageOrder: this.pageOrder,
       hasImage: this.hasImage,
       preloadImage: this.preloadImage,
@@ -55,6 +67,9 @@ export class Page {
       nextPage: this.nextPage,
       dialogs: this.dialogs.map((d: Dialog): DialogInterface => {
         return d.toInterface();
+      }),
+      options: this.options.map((o: Option): OptionInterface => {
+        return o.toInterface();
       }),
     };
   }

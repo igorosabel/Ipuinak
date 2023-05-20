@@ -31,12 +31,20 @@ export class PageDetailComponent {
     { id: 3, name: 'Desaparecer' },
   ];
   image: string = '';
+  pageList: number[] = [];
 
-  openDetail(page: Page | null, tale: Tale): void {
+  openDetail(page: Page, tale: Tale): void {
     this.show = true;
     this.tale = tale;
-    if (page !== null) {
-      this.page = page;
+    this.page = page;
+    this.pageList = [];
+
+    for (let p of this.tale.pages) {
+      if (p.pageOrder !== this.page.pageOrder) {
+        if (p.pageOrder !== null) {
+          this.pageList.push(p.pageOrder);
+        }
+      }
     }
   }
 
@@ -69,5 +77,12 @@ export class PageDetailComponent {
     const d: Dialog = new Dialog();
     d.dialogOrder = this.page.dialogs.length + 1;
     this.page.dialogs.push(d);
+  }
+
+  deleteDialog(dialog: Dialog): void {
+    const ind: number = this.page.dialogs.findIndex((x: Dialog): boolean => {
+      return x.dialogOrder === dialog.dialogOrder;
+    });
+    this.page.dialogs.splice(ind, 1);
   }
 }

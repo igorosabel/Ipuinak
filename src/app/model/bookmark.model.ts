@@ -4,6 +4,7 @@ import { BookmarkInterface } from 'src/app/interfaces/interfaces';
 export class Bookmark {
   constructor(
     public id: number | null = null,
+    public idTale: number | null = null,
     public idPage: number | null = null,
     public idDialog: number | null = null,
     public comment: string | null = null,
@@ -12,6 +13,7 @@ export class Bookmark {
 
   fromInterface(b: BookmarkInterface): Bookmark {
     this.id = b.id;
+    this.idTale = b.idTale;
     this.idPage = b.idPage;
     this.idDialog = b.idDialog;
     this.comment = urldecode(b.comment);
@@ -23,6 +25,7 @@ export class Bookmark {
   toInterface(): BookmarkInterface {
     return {
       id: this.id,
+      idTale: this.idTale,
       idPage: this.idPage,
       idDialog: this.idDialog,
       comment: urlencode(this.comment),

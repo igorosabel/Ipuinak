@@ -5,6 +5,8 @@ import { ActivatedRoute, Params, RouterLink } from '@angular/router';
 import { CharacterDetailComponent } from 'src/app/components/character-detail/character-detail.component';
 import { PageDetailComponent } from 'src/app/components/page-detail/page-detail.component';
 import { StatusIdResult } from 'src/app/interfaces/interfaces';
+import { Character } from 'src/app/model/character.model';
+import { Page } from 'src/app/model/page.model';
 import { Tale } from 'src/app/model/tale.model';
 import { ApiService } from 'src/app/services/api.service';
 import { DialogService } from 'src/app/services/dialog.service';
@@ -28,6 +30,8 @@ import { MaterialModule } from 'src/app/shared/material/material.module';
 export default class EditComponent implements OnInit {
   @ViewChild('name', { static: true }) name!: ElementRef;
   @ViewChild('pageDetail', { static: true }) pageDetail!: PageDetailComponent;
+  @ViewChild('characterDetail', { static: true })
+  characterDetail!: CharacterDetailComponent;
   tale: Tale = new Tale();
   selectedTab: number = 0;
 
@@ -40,7 +44,6 @@ export default class EditComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params): void => {
       const id: number = params['id'];
-      console.log(id);
       this.as.getTale(id).subscribe((result: Tale): void => {
         this.tale = result;
       });
@@ -79,9 +82,18 @@ export default class EditComponent implements OnInit {
   }
 
   add(): void {
-    console.log(this.selectedTab);
     if (this.selectedTab === 0) {
-      this.pageDetail.openDetail(null, this.tale);
+      const p: Page = new Page();
+      p.idTale = this.tale.id;
+      p.pageOrder = this.tale.pages.length + 1;
+
+      this.pageDetail.openDetail(p, this.tale);
+    }
+    if (this.selectedTab === 1) {
+      const c: Character = new Character();
+      c.idTale = this.tale.id;
+
+      this.characterDetail.openDetail(c, this.tale);
     }
   }
 }

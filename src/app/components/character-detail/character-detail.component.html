@@ -1,5 +1,66 @@
-<div class="modal-bg">
-    <mat-card>
-
+<div class="modal-bg"
+     [ngClass]="{'show': show}">
+    <mat-card class="modal-box">
+        <mat-card-header>
+            <mat-card-title>
+                <div class="modal-title">
+                    <span>{{character.name}}</span>
+                    <button mat-icon-button
+                            (click)="close()">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </div>
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="image">
+                <button mat-raised-button
+                        color="primary"
+                        (click)="addImage()">
+                    <mat-icon>add_a_photo</mat-icon>
+                    Cambiar imagen
+                </button>
+                <input type="file"
+                       name="character-file"
+                       id="character-file"
+                       accept="image/png, image/gif, image/jpeg"
+                       (change)="onImageChange($event)">
+                <img *ngIf="character.hasImage"
+                     [src]="character.data">
+            </div>
+            <div class="general-controls">
+                <mat-form-field>
+                    <mat-label>Color</mat-label>
+                    <input matInput
+                           placeholder="Color de texto"
+                           type="color"
+                           [(ngModel)]="character.color">
+                    <span matTextPrefix>
+                        <mat-icon>palette</mat-icon>
+                    </span>
+                </mat-form-field>
+                <mat-form-field class="wide">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput
+                           placeholder="Nombre"
+                           [(ngModel)]="character.name"
+                           #characterName>
+                </mat-form-field>
+            </div>
+        </mat-card-content>
+        <mat-card-actions [ngClass]="{'actions-between': character.id !== null, 'actions-end': character.id === null}">
+            <button mat-raised-button
+                    color="warn"
+                    *ngIf="character.id">
+                <mat-icon>delete_forever</mat-icon>
+                Borrar personaje
+            </button>
+            <button mat-raised-button
+                    color="primary"
+                    (click)="saveCharacter()">
+                <mat-icon>save</mat-icon>
+                Guardar personaje
+            </button>
+        </mat-card-actions>
     </mat-card>
 </div>
