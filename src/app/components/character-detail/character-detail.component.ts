@@ -1,8 +1,16 @@
 import { NgClass, NgIf, NgStyle } from '@angular/common';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { StatusResult } from 'src/app/interfaces/interfaces';
 import { Character } from 'src/app/model/character.model';
 import { Tale } from 'src/app/model/tale.model';
+import { ApiService } from 'src/app/services/api.service';
 import { DialogService } from 'src/app/services/dialog.service';
 import { MaterialModule } from 'src/app/shared/material/material.module';
 
@@ -19,7 +27,10 @@ export class CharacterDetailComponent {
   character: Character = new Character();
   @ViewChild('characterName', { static: true }) characterName!: ElementRef;
 
-  constructor(private ds: DialogService) {}
+  @Output() characterSaveEvent: EventEmitter<boolean> =
+    new EventEmitter<boolean>();
+
+  constructor(private as: ApiService, private ds: DialogService) {}
 
   openDetail(character: Character, tale: Tale): void {
     this.show = true;
@@ -66,6 +77,22 @@ export class CharacterDetailComponent {
           this.characterName.nativeElement.focus();
         });
     }
-    console.log(this.character);
+    this.as
+      .saveCharacter(this.character.toInterface())
+      .subscribe((result: StatusResult): void => {
+        if (result.status === 'ok') {
+          this.characterSaveEvent.emit(true);
+        } else {
+          this.ds
+            .alert({
+              title: 'ERROR',
+              content: 'Ocurrió un error al guardar el personaje.',
+              ok: 'Continuar',
+            })
+            .subscribe((result: boolean): void => {
+              this.characterName.nativeElement.focus();
+            });
+        }
+      });
   }
 }

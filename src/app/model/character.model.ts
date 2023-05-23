@@ -1,5 +1,6 @@
 import { urldecode, urlencode } from '@osumi/tools';
 import { CharacterInterface } from 'src/app/interfaces/interfaces';
+import { environment } from 'src/environments/environment';
 
 export class Character {
   data: string | null = null;
@@ -11,6 +12,20 @@ export class Character {
     public hasImage: boolean = false,
     public color: string | null = null
   ) {}
+
+  get colorHash(): string {
+    if (this.color === null) {
+      return '#fff';
+    }
+    if (this.color.indexOf('#') === -1) {
+      return '#' + this.color;
+    }
+    return this.color;
+  }
+
+  get characterImage(): string {
+    return environment.imagesUrl + 'characters/' + this.id + '.webp';
+  }
 
   fromInterface(c: CharacterInterface): Character {
     this.id = c.id;

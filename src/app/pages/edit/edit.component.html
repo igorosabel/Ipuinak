@@ -27,7 +27,19 @@
                  *ngIf="tale.pages.length === 0">Todavía no hay ninguna página en este cuento. ¡Añade la primera!</div>
         </div>
     </mat-tab>
-    <mat-tab label="Personajes"> Content 2 </mat-tab>
+    <mat-tab label="Personajes">
+        <div class="no-data"
+             *ngIf="tale.characters.length === 0">Todavía no hay ningún personaje en este cuento. ¡Añade el primero!</div>
+        <div class="character-list"
+             *ngIf="tale.characters.length > 0">
+            <div class="character"
+                 *ngFor="let character of tale.characters">
+                <img *ngIf="character.hasImage"
+                     [src]="character.characterImage">
+                <div class="character-name">{{character.name}}</div>
+            </div>
+        </div>
+    </mat-tab>
 </mat-tab-group>
 
 <button mat-fab
@@ -38,4 +50,5 @@
 </button>
 
 <app-page-detail #pageDetail></app-page-detail>
-<app-character-detail #characterDetail></app-character-detail>
+<app-character-detail (characterSaveEvent)="characterSaved($event)"
+                      #characterDetail></app-character-detail>

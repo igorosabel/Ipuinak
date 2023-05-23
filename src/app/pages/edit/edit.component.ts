@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Params, RouterLink } from '@angular/router';
@@ -19,6 +19,7 @@ import { MaterialModule } from 'src/app/shared/material/material.module';
   styleUrls: ['./edit.component.scss'],
   imports: [
     NgIf,
+    NgFor,
     RouterLink,
     FormsModule,
     MaterialModule,
@@ -94,6 +95,17 @@ export default class EditComponent implements OnInit {
       c.idTale = this.tale.id;
 
       this.characterDetail.openDetail(c, this.tale);
+    }
+  }
+
+  characterSaved(ev: boolean): void {
+    if (ev && this.tale.id !== null) {
+      this.as
+        .getCharacters(this.tale.id)
+        .subscribe((result: Character[]): void => {
+          this.tale.characters = result;
+          this.characterDetail.close();
+        });
     }
   }
 }

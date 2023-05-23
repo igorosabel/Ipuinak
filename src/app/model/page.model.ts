@@ -5,6 +5,7 @@ import {
 } from 'src/app/interfaces/interfaces';
 import { Dialog } from 'src/app/model/dialog.model';
 import { Option } from 'src/app/model/option.model';
+import { environment } from 'src/environments/environment';
 
 export class Page {
   constructor(
@@ -30,6 +31,10 @@ export class Page {
       return '#' + this.bgColor;
     }
     return this.bgColor;
+  }
+
+  get pageImage(): string {
+    return environment.imagesUrl + 'pages/' + this.id + '.webp';
   }
 
   fromInterface(p: PageInterface): Page {

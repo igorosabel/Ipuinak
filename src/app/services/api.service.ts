@@ -2,11 +2,15 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import {
+  CharacterInterface,
+  CharactersResult,
   StatusIdResult,
+  StatusResult,
   TaleInterface,
   TaleResult,
   TalesResult,
 } from 'src/app/interfaces/interfaces';
+import { Character } from 'src/app/model/character.model';
 import { Tale } from 'src/app/model/tale.model';
 import { ClassMapperService } from 'src/app/services/class-mapper.service';
 import { environment } from 'src/environments/environment';
@@ -40,6 +44,25 @@ export class ApiService {
       .pipe(
         map((resp: TaleResult): Tale => {
           return this.cms.getTale(resp.tale);
+        })
+      );
+  }
+
+  saveCharacter(character: CharacterInterface): Observable<StatusResult> {
+    return this.http.post<StatusResult>(
+      `${environment.apiUrl}/save-character`,
+      character
+    );
+  }
+
+  getCharacters(idTale: number): Observable<Character[]> {
+    return this.http
+      .post<CharactersResult>(`${environment.apiUrl}/get-characters`, {
+        idTale,
+      })
+      .pipe(
+        map((resp: CharactersResult): Character[] => {
+          return this.cms.getCharacters(resp.list);
         })
       );
   }

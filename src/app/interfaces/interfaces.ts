@@ -80,6 +80,11 @@ export interface TaleResult {
   tale: TaleInterface;
 }
 
+export interface CharactersResult {
+  status: string;
+  list: CharacterInterface[];
+}
+
 export interface StatusResult {
   status: string;
 }
