@@ -36,7 +36,10 @@
                  *ngFor="let character of tale.characters">
                 <img *ngIf="character.hasImage"
                      [src]="character.characterImage">
-                <div class="character-name">{{character.name}}</div>
+                <div class="character-name"
+                     [ngStyle]="{'background-color': character.colorHash+'66'}">
+                    {{character.name}}
+                </div>
             </div>
         </div>
     </mat-tab>

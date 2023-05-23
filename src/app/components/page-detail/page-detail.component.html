@@ -72,7 +72,7 @@
                             <mat-form-field subscriptSizing="dynamic">
                                 <mat-label>Personaje</mat-label>
                                 <mat-select [ngModel]="dialog.idCharacter">
-                                    <mat-option *ngFor="let option of tale.characters"
+                                    <mat-option *ngFor="let option of tale.charactersAndNarrator"
                                                 [value]="option.id">
                                         {{option.name}}
                                     </mat-option>

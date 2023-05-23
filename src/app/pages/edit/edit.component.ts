@@ -1,4 +1,4 @@
-import { NgFor, NgIf } from '@angular/common';
+import { NgFor, NgIf, NgStyle } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Params, RouterLink } from '@angular/router';
@@ -20,6 +20,7 @@ import { MaterialModule } from 'src/app/shared/material/material.module';
   imports: [
     NgIf,
     NgFor,
+    NgStyle,
     RouterLink,
     FormsModule,
     MaterialModule,

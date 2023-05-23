@@ -18,6 +18,10 @@ export class Tale {
     public lastBookmark: Bookmark | null = null
   ) {}
 
+  get charactersAndNarrator(): Character[] {
+    return [new Character(null, this.id, 'Narrador'), ...this.characters];
+  }
+
   fromInterface(t: TaleInterface): Tale {
     this.id = t.id;
     this.name = urldecode(t.name);
