@@ -35,6 +35,7 @@ export default class EditComponent implements OnInit {
   @ViewChild('characterDetail', { static: true })
   characterDetail!: CharacterDetailComponent;
   tale: Tale = new Tale();
+  taleSaved: boolean = false;
   selectedTab: number = 0;
 
   constructor(
@@ -69,6 +70,12 @@ export default class EditComponent implements OnInit {
     this.as
       .saveTale(this.tale.toInterface())
       .subscribe((result: StatusIdResult): void => {
+        if (result.status === 'ok') {
+          this.taleSaved = true;
+          window.setTimeout((): void => {
+            this.taleSaved = false;
+          }, 3000);
+        }
         if (result.status === 'error') {
           this.ds
             .alert({

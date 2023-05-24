@@ -16,7 +16,8 @@
     </mat-form-field>
     <button mat-icon-button
             (click)="saveTale()">
-        <mat-icon>save</mat-icon>
+        <mat-icon *ngIf="!taleSaved">save</mat-icon>
+        <mat-icon *ngIf="taleSaved">done</mat-icon>
     </button>
 </div>
 
