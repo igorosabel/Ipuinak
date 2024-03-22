@@ -25,8 +25,10 @@
                        id="character-file"
                        accept="image/png, image/gif, image/jpeg"
                        (change)="onImageChange($event)">
-                <img *ngIf="character.hasImage"
-                     [src]="character.data">
+                @if (character.hasImage) {
+                <img [src]="character.data"
+                     alt="Imagen">
+                }
             </div>
             <div class="general-controls">
                 <mat-form-field>
@@ -49,12 +51,13 @@
             </div>
         </mat-card-content>
         <mat-card-actions [ngClass]="{'actions-between': character.id !== null, 'actions-end': character.id === null}">
+            @if (character.id) {
             <button mat-raised-button
-                    color="warn"
-                    *ngIf="character.id">
+                    color="warn">
                 <mat-icon>delete_forever</mat-icon>
                 Borrar personaje
             </button>
+            }
             <button mat-raised-button
                     color="primary"
                     (click)="saveCharacter()">

@@ -1,34 +1,60 @@
-import { NgClass, NgIf, NgStyle } from '@angular/common';
+import { NgClass, NgStyle } from '@angular/common';
 import {
   Component,
   ElementRef,
-  EventEmitter,
-  Output,
-  ViewChild,
+  OutputEmitterRef,
+  Signal,
+  output,
+  viewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { StatusResult } from 'src/app/interfaces/interfaces';
-import { Character } from 'src/app/model/character.model';
-import { Tale } from 'src/app/model/tale.model';
-import { ApiService } from 'src/app/services/api.service';
-import { DialogService } from 'src/app/services/dialog.service';
-import { MaterialModule } from 'src/app/shared/material/material.module';
+import { MatButton, MatIconButton } from '@angular/material/button';
+import {
+  MatCard,
+  MatCardActions,
+  MatCardContent,
+  MatCardHeader,
+  MatCardTitle,
+} from '@angular/material/card';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatIcon } from '@angular/material/icon';
+import { MatInput } from '@angular/material/input';
+import { StatusResult } from '@interfaces/interfaces';
+import { Character } from '@model/character.model';
+import { Tale } from '@model/tale.model';
+import { ApiService } from '@services/api.service';
+import { DialogService } from '@services/dialog.service';
 
 @Component({
   standalone: true,
   selector: 'app-character-detail',
   templateUrl: './character-detail.component.html',
   styleUrls: ['./character-detail.component.scss'],
-  imports: [NgClass, NgStyle, NgIf, FormsModule, MaterialModule],
+  imports: [
+    NgClass,
+    NgStyle,
+    FormsModule,
+    MatCard,
+    MatCardHeader,
+    MatCardTitle,
+    MatCardContent,
+    MatCardActions,
+    MatButton,
+    MatIconButton,
+    MatIcon,
+    MatFormField,
+    MatLabel,
+    MatInput,
+  ],
 })
 export class CharacterDetailComponent {
   show: boolean = false;
   tale: Tale = new Tale();
   character: Character = new Character();
-  @ViewChild('characterName', { static: true }) characterName!: ElementRef;
+  characterName: Signal<ElementRef> =
+    viewChild.required<ElementRef>('characterName');
 
-  @Output() characterSaveEvent: EventEmitter<boolean> =
-    new EventEmitter<boolean>();
+  characterSaveEvent: OutputEmitterRef<boolean> = output<boolean>();
 
   constructor(private as: ApiService, private ds: DialogService) {}
 
@@ -73,8 +99,8 @@ export class CharacterDetailComponent {
           content: 'No pueddes dejar el nombre del personaje en blanco.',
           ok: 'Continuar',
         })
-        .subscribe((result: boolean): void => {
-          this.characterName.nativeElement.focus();
+        .subscribe((): void => {
+          this.characterName().nativeElement.focus();
         });
     }
     this.as
@@ -89,8 +115,8 @@ export class CharacterDetailComponent {
               content: 'Ocurrió un error al guardar el personaje.',
               ok: 'Continuar',
             })
-            .subscribe((result: boolean): void => {
-              this.characterName.nativeElement.focus();
+            .subscribe((): void => {
+              this.characterName().nativeElement.focus();
             });
         }
       });

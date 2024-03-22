@@ -28,8 +28,10 @@
                                id="image-file"
                                accept="image/png, image/gif, image/jpeg"
                                (change)="onImageChange($event)">
-                        <img *ngIf="page.hasImage"
-                             [src]="image">
+                        @if (page.hasImage) {
+                        <img [src]="image"
+                             alt="Imagen">
+                        }
                     </div>
                     <div class="general-controls">
                         <mat-form-field>
@@ -45,19 +47,21 @@
                         <mat-form-field>
                             <mat-label>Animación entrada</mat-label>
                             <mat-select [ngModel]="page.animationIn">
-                                <mat-option *ngFor="let option of animationOptionsIn"
-                                            [value]="option.id">
+                                @for (option of animationOptionsIn; track option.id) {
+                                <mat-option [value]="option.id">
                                     {{option.name}}
                                 </mat-option>
+                                }
                             </mat-select>
                         </mat-form-field>
                         <mat-form-field>
                             <mat-label>Animación salida</mat-label>
                             <mat-select [ngModel]="page.animationOut">
-                                <mat-option *ngFor="let option of animationOptionsOut"
-                                            [value]="option.id">
+                                @for (option of animationOptionsOut; track option.id) {
+                                <mat-option [value]="option.id">
                                     {{option.name}}
                                 </mat-option>
+                                }
                             </mat-select>
                         </mat-form-field>
                         <div class="form-field">
@@ -67,16 +71,17 @@
                 </mat-tab>
                 <mat-tab label="Diálogos">
                     <div class="dialog-list">
-                        <div *ngFor="let dialog of page.dialogs"
-                             class="dialog-row">
+                        @for (dialog of page.dialogs; track dialog.id) {
+                        <div class="dialog-row">
                             <mat-form-field subscriptSizing="dynamic">
                                 <mat-label>Personaje</mat-label>
                                 <mat-select [ngModel]="dialog.idCharacter">
                                     <mat-option [value]="null">Narrador</mat-option>
-                                    <mat-option *ngFor="let option of tale.characters"
-                                                [value]="option.id">
+                                    @for (option of tale.characters; track option.id) {
+                                    <mat-option [value]="option.id">
                                         {{option.name}}
                                     </mat-option>
+                                    }
                                 </mat-select>
                             </mat-form-field>
                             <mat-form-field subscriptSizing="dynamic"
@@ -91,6 +96,7 @@
                                 <mat-icon>close</mat-icon>
                             </button>
                         </div>
+                        }
                         <div class="dialog-options">
                             <button mat-raised-button
                                     color="primary"
@@ -105,12 +111,13 @@
             </mat-tab-group>
         </mat-card-content>
         <mat-card-actions [ngClass]="{'actions-between': page.id !== null, 'actions-end': page.id === null}">
+            @if (page.id) {
             <button mat-raised-button
-                    color="warn"
-                    *ngIf="page.id">
+                    color="warn">
                 <mat-icon>delete_forever</mat-icon>
                 Borrar página
             </button>
+            }
             <button mat-raised-button
                     color="primary">
                 <mat-icon>save</mat-icon>

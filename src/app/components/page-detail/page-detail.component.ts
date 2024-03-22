@@ -1,18 +1,49 @@
-import { NgClass, NgFor, NgIf, NgStyle } from '@angular/common';
+import { NgClass, NgStyle } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AnimationOption } from 'src/app/interfaces/interfaces';
-import { Dialog } from 'src/app/model/dialog.model';
-import { Page } from 'src/app/model/page.model';
-import { Tale } from 'src/app/model/tale.model';
-import { MaterialModule } from 'src/app/shared/material/material.module';
+import { MatButton, MatIconButton } from '@angular/material/button';
+import {
+  MatCard,
+  MatCardActions,
+  MatCardContent,
+  MatCardHeader,
+  MatCardTitle,
+} from '@angular/material/card';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatIcon } from '@angular/material/icon';
+import { MatInput } from '@angular/material/input';
+import { MatOption, MatSelect } from '@angular/material/select';
+import { MatTab, MatTabGroup } from '@angular/material/tabs';
+import { AnimationOption } from '@interfaces/interfaces';
+import { Dialog } from '@model/dialog.model';
+import { Page } from '@model/page.model';
+import { Tale } from '@model/tale.model';
 
 @Component({
   standalone: true,
   selector: 'app-page-detail',
   templateUrl: './page-detail.component.html',
   styleUrls: ['./page-detail.component.scss'],
-  imports: [NgClass, NgStyle, NgIf, NgFor, FormsModule, MaterialModule],
+  imports: [
+    NgClass,
+    NgStyle,
+    FormsModule,
+    MatCard,
+    MatCardHeader,
+    MatCardTitle,
+    MatCardContent,
+    MatCardActions,
+    MatIconButton,
+    MatButton,
+    MatIcon,
+    MatTabGroup,
+    MatTab,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatSelect,
+    MatOption,
+  ],
 })
 export class PageDetailComponent {
   show: boolean = false;
@@ -39,7 +70,7 @@ export class PageDetailComponent {
     this.page = page;
     this.pageList = [];
 
-    for (let p of this.tale.pages) {
+    for (const p of this.tale.pages) {
       if (p.pageOrder !== this.page.pageOrder) {
         if (p.pageOrder !== null) {
           this.pageList.push(p.pageOrder);
