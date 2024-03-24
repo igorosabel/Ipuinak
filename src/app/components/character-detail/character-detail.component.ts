@@ -16,7 +16,11 @@ import {
   MatCardHeader,
   MatCardTitle,
 } from '@angular/material/card';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
+import {
+  MatFormField,
+  MatLabel,
+  MatPrefix,
+} from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
 import { StatusResult } from '@interfaces/interfaces';
@@ -45,6 +49,7 @@ import { DialogService } from '@services/dialog.service';
     MatFormField,
     MatLabel,
     MatInput,
+    MatPrefix,
   ],
 })
 export class CharacterDetailComponent {

@@ -9,10 +9,15 @@ import {
   MatCardHeader,
   MatCardTitle,
 } from '@angular/material/card';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
+import {
+  MatFormField,
+  MatLabel,
+  MatPrefix,
+} from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
 import { MatOption, MatSelect } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTab, MatTabGroup } from '@angular/material/tabs';
 import { AnimationOption } from '@app/interfaces/dialog.interfaces';
 import { Dialog } from '@model/dialog.model';
@@ -41,8 +46,10 @@ import { Tale } from '@model/tale.model';
     MatFormField,
     MatLabel,
     MatInput,
+    MatPrefix,
     MatSelect,
     MatOption,
+    MatSlideToggleModule,
   ],
 })
 export class PageDetailComponent {
