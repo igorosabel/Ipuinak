@@ -16,33 +16,43 @@
     </mat-form-field>
     <button mat-icon-button
             (click)="saveTale()">
-        <mat-icon *ngIf="!taleSaved">save</mat-icon>
-        <mat-icon *ngIf="taleSaved">done</mat-icon>
+        @if (!taleSaved) {
+        <mat-icon>save</mat-icon>
+        }
+        @else {
+        <mat-icon>done</mat-icon>
+        }
     </button>
 </div>
 
 <mat-tab-group [(selectedIndex)]="selectedTab">
     <mat-tab label="Páginas">
         <div class="tab-content">
-            <div class="no-data"
-                 *ngIf="tale.pages.length === 0">Todavía no hay ninguna página en este cuento. ¡Añade la primera!</div>
+            @if (tale.pages.length === 0) {
+            <div class="no-data">Todavía no hay ninguna página en este cuento. ¡Añade la primera!</div>
+            }
         </div>
     </mat-tab>
     <mat-tab label="Personajes">
-        <div class="no-data"
-             *ngIf="tale.characters.length === 0">Todavía no hay ningún personaje en este cuento. ¡Añade el primero!</div>
-        <div class="character-list"
-             *ngIf="tale.characters.length > 0">
-            <div class="character"
-                 *ngFor="let character of tale.characters">
-                <img *ngIf="character.hasImage"
-                     [src]="character.characterImage">
+        @if (tale.characters.length === 0) {
+        <div class="no-data">Todavía no hay ningún personaje en este cuento. ¡Añade el primero!</div>
+        }
+        @else {
+        <div class="character-list">
+            @for (character of tale.characters; track character.id) {
+            <div class="character">
+                @if (character.hasImage) {
+                <img [src]="character.characterImage"
+                     [alt]="character.name">
+                }
                 <div class="character-name"
                      [ngStyle]="{'background-color': character.colorHash+'66'}">
                     {{character.name}}
                 </div>
             </div>
+            }
         </div>
+        }
     </mat-tab>
 </mat-tab-group>
 
@@ -53,6 +63,6 @@
     <mat-icon>add</mat-icon>
 </button>
 
-<app-page-detail #pageDetail></app-page-detail>
+<app-page-detail #pageDetail />
 <app-character-detail (characterSaveEvent)="characterSaved($event)"
-                      #characterDetail></app-character-detail>
+                      #characterDetail />

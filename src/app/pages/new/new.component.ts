@@ -1,22 +1,35 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, Signal, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MatIconButton } from '@angular/material/button';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatIcon } from '@angular/material/icon';
+import { MatInput } from '@angular/material/input';
+import { MatToolbar } from '@angular/material/toolbar';
 import { Router, RouterLink } from '@angular/router';
-import { StatusIdResult } from 'src/app/interfaces/interfaces';
-import { Tale } from 'src/app/model/tale.model';
-import { ApiService } from 'src/app/services/api.service';
-import { DialogService } from 'src/app/services/dialog.service';
-import { MaterialModule } from 'src/app/shared/material/material.module';
+import { StatusIdResult } from '@interfaces/interfaces';
+import { Tale } from '@model/tale.model';
+import { ApiService } from '@services/api.service';
+import { DialogService } from '@services/dialog.service';
 
 @Component({
   standalone: true,
   selector: 'app-new',
   templateUrl: './new.component.html',
   styleUrls: ['./new.component.scss'],
-  imports: [RouterLink, FormsModule, MaterialModule],
+  imports: [
+    RouterLink,
+    FormsModule,
+    MatToolbar,
+    MatIconButton,
+    MatIcon,
+    MatFormField,
+    MatLabel,
+    MatInput,
+  ],
   providers: [DialogService],
 })
 export default class NewComponent {
-  @ViewChild('name', { static: true }) name!: ElementRef;
+  name: Signal<ElementRef> = viewChild.required<ElementRef>('name');
   tale: Tale = new Tale();
 
   constructor(
@@ -35,8 +48,8 @@ export default class NewComponent {
           content: 'No puedes dejar el nombre del cuento en blanco.',
           ok: 'Continuar',
         })
-        .subscribe((result: boolean): void => {
-          this.name.nativeElement.focus();
+        .subscribe((): void => {
+          this.name().nativeElement.focus();
         });
       return;
     }
@@ -53,8 +66,8 @@ export default class NewComponent {
               content: 'Ha ocurrido un error al guardar el cuento.',
               ok: 'Continuar',
             })
-            .subscribe((result: boolean): void => {
-              this.name.nativeElement.focus();
+            .subscribe((): void => {
+              this.name().nativeElement.focus();
             });
         }
       });

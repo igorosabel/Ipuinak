@@ -14,7 +14,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { MatTab, MatTabGroup } from '@angular/material/tabs';
-import { AnimationOption } from '@interfaces/interfaces';
+import { AnimationOption } from '@app/interfaces/dialog.interfaces';
 import { Dialog } from '@model/dialog.model';
 import { Page } from '@model/page.model';
 import { Tale } from '@model/tale.model';

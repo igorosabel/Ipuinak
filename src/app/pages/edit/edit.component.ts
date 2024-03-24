@@ -1,16 +1,27 @@
-import { NgFor, NgIf, NgStyle } from '@angular/common';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { NgStyle } from '@angular/common';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  Signal,
+  viewChild,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MatFabButton, MatIconButton } from '@angular/material/button';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatIcon } from '@angular/material/icon';
+import { MatInput } from '@angular/material/input';
+import { MatTab, MatTabGroup } from '@angular/material/tabs';
+import { MatToolbar } from '@angular/material/toolbar';
 import { ActivatedRoute, Params, RouterLink } from '@angular/router';
-import { CharacterDetailComponent } from 'src/app/components/character-detail/character-detail.component';
-import { PageDetailComponent } from 'src/app/components/page-detail/page-detail.component';
-import { StatusIdResult } from 'src/app/interfaces/interfaces';
-import { Character } from 'src/app/model/character.model';
-import { Page } from 'src/app/model/page.model';
-import { Tale } from 'src/app/model/tale.model';
-import { ApiService } from 'src/app/services/api.service';
-import { DialogService } from 'src/app/services/dialog.service';
-import { MaterialModule } from 'src/app/shared/material/material.module';
+import { CharacterDetailComponent } from '@components/character-detail/character-detail.component';
+import { PageDetailComponent } from '@components/page-detail/page-detail.component';
+import { StatusIdResult } from '@interfaces/interfaces';
+import { Character } from '@model/character.model';
+import { Page } from '@model/page.model';
+import { Tale } from '@model/tale.model';
+import { ApiService } from '@services/api.service';
+import { DialogService } from '@services/dialog.service';
 
 @Component({
   standalone: true,
@@ -18,22 +29,29 @@ import { MaterialModule } from 'src/app/shared/material/material.module';
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.scss'],
   imports: [
-    NgIf,
-    NgFor,
     NgStyle,
     RouterLink,
-    FormsModule,
-    MaterialModule,
     PageDetailComponent,
     CharacterDetailComponent,
+    MatToolbar,
+    MatIconButton,
+    MatIcon,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatTabGroup,
+    MatTab,
+    MatFabButton,
+    FormsModule,
   ],
   providers: [DialogService],
 })
 export default class EditComponent implements OnInit {
-  @ViewChild('name', { static: true }) name!: ElementRef;
-  @ViewChild('pageDetail', { static: true }) pageDetail!: PageDetailComponent;
-  @ViewChild('characterDetail', { static: true })
-  characterDetail!: CharacterDetailComponent;
+  name: Signal<ElementRef> = viewChild.required<ElementRef>('name');
+  pageDetail: Signal<PageDetailComponent> =
+    viewChild.required<PageDetailComponent>('pageDetail');
+  characterDetail: Signal<CharacterDetailComponent> =
+    viewChild.required<CharacterDetailComponent>('characterDetail');
   tale: Tale = new Tale();
   taleSaved: boolean = false;
   selectedTab: number = 0;
@@ -61,8 +79,8 @@ export default class EditComponent implements OnInit {
           content: 'No puedes dejar el nombre del cuento en blanco.',
           ok: 'Continuar',
         })
-        .subscribe((result: boolean): void => {
-          this.name.nativeElement.focus();
+        .subscribe((): void => {
+          this.name().nativeElement.focus();
         });
       return;
     }
@@ -83,8 +101,8 @@ export default class EditComponent implements OnInit {
               content: 'Ha ocurrido un error al guardar el cuento.',
               ok: 'Continuar',
             })
-            .subscribe((result: boolean): void => {
-              this.name.nativeElement.focus();
+            .subscribe((): void => {
+              this.name().nativeElement.focus();
             });
         }
       });
@@ -96,13 +114,13 @@ export default class EditComponent implements OnInit {
       p.idTale = this.tale.id;
       p.pageOrder = this.tale.pages.length + 1;
 
-      this.pageDetail.openDetail(p, this.tale);
+      this.pageDetail().openDetail(p, this.tale);
     }
     if (this.selectedTab === 1) {
       const c: Character = new Character();
       c.idTale = this.tale.id;
 
-      this.characterDetail.openDetail(c, this.tale);
+      this.characterDetail().openDetail(c, this.tale);
     }
   }
 
@@ -112,7 +130,7 @@ export default class EditComponent implements OnInit {
         .getCharacters(this.tale.id)
         .subscribe((result: Character[]): void => {
           this.tale.characters = result;
-          this.characterDetail.close();
+          this.characterDetail().close();
         });
     }
   }

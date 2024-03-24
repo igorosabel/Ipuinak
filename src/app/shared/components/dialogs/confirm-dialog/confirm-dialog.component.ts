@@ -1,13 +1,25 @@
-import { A11yModule } from '@angular/cdk/a11y';
+import { A11yModule, CdkTrapFocus } from '@angular/cdk/a11y';
 import { Component } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
-import { MaterialModule } from 'src/app/shared/material/material.module';
+import { MatButton } from '@angular/material/button';
+import {
+  MatDialogActions,
+  MatDialogContent,
+  MatDialogRef,
+  MatDialogTitle,
+} from '@angular/material/dialog';
 
 @Component({
   standalone: true,
-  selector: 'otpv-confirm-dialog',
+  selector: 'app-confirm-dialog',
   templateUrl: './confirm-dialog.component.html',
-  imports: [A11yModule, MaterialModule],
+  imports: [
+    A11yModule,
+    MatDialogTitle,
+    MatDialogContent,
+    MatDialogActions,
+    MatButton,
+    CdkTrapFocus,
+  ],
 })
 export class ConfirmDialogComponent {
   public title: string = '';

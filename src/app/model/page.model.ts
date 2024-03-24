@@ -1,11 +1,8 @@
-import {
-  DialogInterface,
-  OptionInterface,
-  PageInterface,
-} from 'src/app/interfaces/interfaces';
-import { Dialog } from 'src/app/model/dialog.model';
-import { Option } from 'src/app/model/option.model';
-import { environment } from 'src/environments/environment';
+import { environment } from '@env/environment';
+import { DialogInterface } from '@interfaces/dialog.interfaces';
+import { OptionInterface, PageInterface } from '@interfaces/page.interfaces';
+import { Dialog } from '@model/dialog.model';
+import { Option } from '@model/option.model';
 
 export class Page {
   constructor(

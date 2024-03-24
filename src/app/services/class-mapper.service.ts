@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
-import {
-  CharacterInterface,
-  DialogInterface,
-  PageInterface,
-  TaleInterface,
-} from 'src/app/interfaces/interfaces';
-import { Character } from 'src/app/model/character.model';
-import { Dialog } from 'src/app/model/dialog.model';
-import { Page } from 'src/app/model/page.model';
-import { Tale } from 'src/app/model/tale.model';
+import { CharacterInterface } from '@interfaces/character.interfaces';
+import { DialogInterface } from '@interfaces/dialog.interfaces';
+import { PageInterface } from '@interfaces/page.interfaces';
+import { TaleInterface } from '@interfaces/tale.interfaces';
+import { Character } from '@model/character.model';
+import { Dialog } from '@model/dialog.model';
+import { Page } from '@model/page.model';
+import { Tale } from '@model/tale.model';
 
 @Injectable({
   providedIn: 'root',

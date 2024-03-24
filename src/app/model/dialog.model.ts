@@ -1,5 +1,5 @@
+import { DialogInterface } from '@interfaces/dialog.interfaces';
 import { urldecode, urlencode } from '@osumi/tools';
-import { DialogInterface } from 'src/app/interfaces/interfaces';
 
 export class Dialog {
   constructor(

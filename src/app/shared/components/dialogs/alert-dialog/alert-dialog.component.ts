@@ -1,13 +1,24 @@
 import { A11yModule } from '@angular/cdk/a11y';
 import { Component } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
-import { MaterialModule } from 'src/app/shared/material/material.module';
+import { MatButton } from '@angular/material/button';
+import {
+  MatDialogActions,
+  MatDialogContent,
+  MatDialogRef,
+  MatDialogTitle,
+} from '@angular/material/dialog';
 
 @Component({
   standalone: true,
-  selector: 'otpv-alert-dialog',
+  selector: 'app-alert-dialog',
   templateUrl: './alert-dialog.component.html',
-  imports: [A11yModule, MaterialModule],
+  imports: [
+    A11yModule,
+    MatDialogTitle,
+    MatDialogContent,
+    MatDialogActions,
+    MatButton,
+  ],
 })
 export class AlertDialogComponent {
   public title: string = '';

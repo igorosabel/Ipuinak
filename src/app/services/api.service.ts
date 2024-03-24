@@ -1,19 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { environment } from '@env/environment';
 import {
   CharacterInterface,
   CharactersResult,
-  StatusIdResult,
-  StatusResult,
+} from '@interfaces/character.interfaces';
+import { StatusIdResult, StatusResult } from '@interfaces/interfaces';
+import {
   TaleInterface,
   TaleResult,
   TalesResult,
-} from 'src/app/interfaces/interfaces';
-import { Character } from 'src/app/model/character.model';
-import { Tale } from 'src/app/model/tale.model';
-import { ClassMapperService } from 'src/app/services/class-mapper.service';
-import { environment } from 'src/environments/environment';
+} from '@interfaces/tale.interfaces';
+import { Character } from '@model/character.model';
+import { Tale } from '@model/tale.model';
+import { ClassMapperService } from '@services/class-mapper.service';
+import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',

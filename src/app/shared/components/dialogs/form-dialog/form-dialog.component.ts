@@ -1,22 +1,35 @@
-import { A11yModule } from '@angular/cdk/a11y';
-import { NgFor, NgIf } from '@angular/common';
+import { A11yModule, CdkTrapFocus } from '@angular/cdk/a11y';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { DialogField } from 'src/app/interfaces/interfaces';
-import { MaterialModule } from 'src/app/shared/material/material.module';
+import { MatButton } from '@angular/material/button';
+import {
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogRef,
+  MatDialogTitle,
+} from '@angular/material/dialog';
+import { MatFormField, MatHint, MatLabel } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { DialogField } from '@app/interfaces/dialog.interfaces';
 
 @Component({
   standalone: true,
-  selector: 'otpv-form-dialog',
+  selector: 'app-form-dialog',
   templateUrl: './form-dialog.component.html',
   imports: [
     A11yModule,
-    NgFor,
-    NgIf,
-    MatDialogModule,
-    MaterialModule,
     FormsModule,
+    MatDialogTitle,
+    MatDialogContent,
+    MatDialogActions,
+    MatDialogClose,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatHint,
+    MatButton,
+    CdkTrapFocus,
   ],
 })
 export class FormDialogComponent {

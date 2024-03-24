@@ -1,5 +1,5 @@
+import { OptionInterface } from '@interfaces/page.interfaces';
 import { urldecode, urlencode } from '@osumi/tools';
-import { OptionInterface } from 'src/app/interfaces/interfaces';
 
 export class Option {
   constructor(

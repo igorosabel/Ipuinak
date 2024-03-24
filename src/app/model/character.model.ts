@@ -1,6 +1,6 @@
+import { environment } from '@env/environment';
+import { CharacterInterface } from '@interfaces/character.interfaces';
 import { urldecode, urlencode } from '@osumi/tools';
-import { CharacterInterface } from 'src/app/interfaces/interfaces';
-import { environment } from 'src/environments/environment';
 
 export class Character {
   data: string | null = null;

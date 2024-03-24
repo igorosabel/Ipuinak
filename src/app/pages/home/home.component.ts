@@ -1,27 +1,52 @@
-import { AsyncPipe, NgClass, NgFor, NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { AsyncPipe, NgClass } from '@angular/common';
+import { Component, WritableSignal, signal } from '@angular/core';
+import {
+  MatButton,
+  MatFabButton,
+  MatIconButton,
+} from '@angular/material/button';
+import {
+  MatCard,
+  MatCardContent,
+  MatCardHeader,
+  MatCardTitle,
+} from '@angular/material/card';
+import { MatIcon } from '@angular/material/icon';
+import { MatToolbar } from '@angular/material/toolbar';
 import { RouterLink } from '@angular/router';
+import { Tale } from '@model/tale.model';
+import { ApiService } from '@services/api.service';
 import { Observable } from 'rxjs';
-import { Tale } from 'src/app/model/tale.model';
-import { ApiService } from 'src/app/services/api.service';
-import { MaterialModule } from 'src/app/shared/material/material.module';
 
 @Component({
   standalone: true,
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  imports: [NgFor, NgIf, NgClass, AsyncPipe, RouterLink, MaterialModule],
+  imports: [
+    NgClass,
+    AsyncPipe,
+    RouterLink,
+    MatToolbar,
+    MatIconButton,
+    MatButton,
+    MatFabButton,
+    MatIcon,
+    MatCard,
+    MatCardHeader,
+    MatCardTitle,
+    MatCardContent,
+  ],
 })
 export class HomeComponent {
   tales$: Observable<Tale[]>;
-  edit: boolean = false;
+  edit: WritableSignal<boolean> = signal<boolean>(false);
 
   constructor(private as: ApiService) {
     this.tales$ = this.as.getTales();
   }
 
   changeEdit(): void {
-    this.edit = !this.edit;
+    this.edit.update((value: boolean): boolean => !value);
   }
 }

@@ -1,5 +1,5 @@
+import { BookmarkInterface } from '@interfaces/tale.interfaces';
 import { urldecode, urlencode } from '@osumi/tools';
-import { BookmarkInterface } from 'src/app/interfaces/interfaces';
 
 export class Bookmark {
   constructor(
