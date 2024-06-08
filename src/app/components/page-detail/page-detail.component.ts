@@ -1,5 +1,5 @@
 import { NgClass, NgStyle } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, WritableSignal, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import {
@@ -19,10 +19,10 @@ import { MatInput } from '@angular/material/input';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTab, MatTabGroup } from '@angular/material/tabs';
-import { AnimationOption } from '@app/interfaces/dialog.interfaces';
-import { Dialog } from '@model/dialog.model';
-import { Page } from '@model/page.model';
-import { Tale } from '@model/tale.model';
+import { AnimationOption } from '@interfaces/dialog.interfaces';
+import Dialog from '@model/dialog.model';
+import Page from '@model/page.model';
+import Tale from '@model/tale.model';
 
 @Component({
   standalone: true,
@@ -52,8 +52,8 @@ import { Tale } from '@model/tale.model';
     MatSlideToggleModule,
   ],
 })
-export class PageDetailComponent {
-  show: boolean = false;
+export default class PageDetailComponent {
+  show: WritableSignal<boolean> = signal<boolean>(false);
   tale: Tale = new Tale();
   page: Page = new Page();
   animationOptionsIn: AnimationOption[] = [
@@ -72,7 +72,7 @@ export class PageDetailComponent {
   pageList: number[] = [];
 
   openDetail(page: Page, tale: Tale): void {
-    this.show = true;
+    this.show.set(true);
     this.tale = tale;
     this.page = page;
     this.pageList = [];
@@ -87,7 +87,7 @@ export class PageDetailComponent {
   }
 
   close(): void {
-    this.show = false;
+    this.show.update((value: boolean): boolean => !value);
   }
 
   addImage(): void {

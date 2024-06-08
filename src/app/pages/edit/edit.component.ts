@@ -4,6 +4,9 @@ import {
   ElementRef,
   OnInit,
   Signal,
+  WritableSignal,
+  inject,
+  signal,
   viewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -14,14 +17,14 @@ import { MatInput } from '@angular/material/input';
 import { MatTab, MatTabGroup } from '@angular/material/tabs';
 import { MatToolbar } from '@angular/material/toolbar';
 import { ActivatedRoute, Params, RouterLink } from '@angular/router';
-import { CharacterDetailComponent } from '@components/character-detail/character-detail.component';
-import { PageDetailComponent } from '@components/page-detail/page-detail.component';
+import CharacterDetailComponent from '@components/character-detail/character-detail.component';
+import PageDetailComponent from '@components/page-detail/page-detail.component';
 import { StatusIdResult } from '@interfaces/interfaces';
-import { Character } from '@model/character.model';
-import { Page } from '@model/page.model';
-import { Tale } from '@model/tale.model';
-import { ApiService } from '@services/api.service';
-import { DialogService } from '@services/dialog.service';
+import Character from '@model/character.model';
+import Page from '@model/page.model';
+import Tale from '@model/tale.model';
+import ApiService from '@services/api.service';
+import DialogService from '@services/dialog.service';
 
 @Component({
   standalone: true,
@@ -47,20 +50,18 @@ import { DialogService } from '@services/dialog.service';
   providers: [DialogService],
 })
 export default class EditComponent implements OnInit {
+  private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
+  private as: ApiService = inject(ApiService);
+  private ds: DialogService = inject(DialogService);
+
   name: Signal<ElementRef> = viewChild.required<ElementRef>('name');
   pageDetail: Signal<PageDetailComponent> =
     viewChild.required<PageDetailComponent>('pageDetail');
   characterDetail: Signal<CharacterDetailComponent> =
     viewChild.required<CharacterDetailComponent>('characterDetail');
   tale: Tale = new Tale();
-  taleSaved: boolean = false;
+  taleSaved: WritableSignal<boolean> = signal<boolean>(false);
   selectedTab: number = 0;
-
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private as: ApiService,
-    private ds: DialogService
-  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params): void => {
@@ -89,9 +90,9 @@ export default class EditComponent implements OnInit {
       .saveTale(this.tale.toInterface())
       .subscribe((result: StatusIdResult): void => {
         if (result.status === 'ok') {
-          this.taleSaved = true;
+          this.taleSaved.set(true);
           window.setTimeout((): void => {
-            this.taleSaved = false;
+            this.taleSaved.set(false);
           }, 3000);
         }
         if (result.status === 'error') {

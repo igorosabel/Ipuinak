@@ -1,5 +1,5 @@
 import { A11yModule, CdkTrapFocus } from '@angular/cdk/a11y';
-import { Component } from '@angular/core';
+import { Component, WritableSignal, inject, signal } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import {
   MatDialogActions,
@@ -21,11 +21,13 @@ import {
     CdkTrapFocus,
   ],
 })
-export class ConfirmDialogComponent {
-  public title: string = '';
-  public content: string = '';
-  public ok: string = 'Continuar';
-  public cancel: string | undefined = 'Cancelar';
+export default class ConfirmDialogComponent {
+  public dialogRef: MatDialogRef<ConfirmDialogComponent> = inject(MatDialogRef);
 
-  constructor(public dialogRef: MatDialogRef<ConfirmDialogComponent>) {}
+  public title: WritableSignal<string> = signal<string>('');
+  public content: WritableSignal<string> = signal<string>('');
+  public ok: WritableSignal<string> = signal<string>('Continuar');
+  public cancel: WritableSignal<string | undefined> = signal<
+    string | undefined
+  >('Cancelar');
 }

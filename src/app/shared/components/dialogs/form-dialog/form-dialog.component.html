@@ -1,7 +1,7 @@
-<h1 mat-dialog-title>{{ title }}</h1>
+<h1 mat-dialog-title>{{ title() }}</h1>
 <div mat-dialog-content>
-	<p>{{ content }}</p>
-	@for (field of fields; track field) {
+	<p>{{ content() }}</p>
+	@for (field of fields(); track field) {
 	<div class="form-field margin-right">
 		<label>{{field.title}}</label>
 		<mat-form-field class="max-width">
@@ -20,10 +20,10 @@
 	 align="end">
 	<button type="button"
 			mat-button
-			(click)="dialogRef.close()">{{ cancel }}</button>
+			(click)="dialogRef.close()">{{ cancel() }}</button>
 	<button type="button"
-			mat-raised-button
+			mat-flat-button
 			color="primary"
 			[mat-dialog-close]="fields"
-			cdkFocusInitial>{{ ok }}</button>
+			cdkFocusInitial>{{ ok() }}</button>
 </div>

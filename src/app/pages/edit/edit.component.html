@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar class="header">
     <button mat-icon-button
             routerLink="/">
         <mat-icon>navigate_before</mat-icon>
@@ -16,7 +16,7 @@
     </mat-form-field>
     <button mat-icon-button
             (click)="saveTale()">
-        @if (!taleSaved) {
+        @if (!taleSaved()) {
         <mat-icon>save</mat-icon>
         }
         @else {

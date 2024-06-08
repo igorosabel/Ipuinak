@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar class="header">
     <span class="header-title">Ipuinak</span>
     <button mat-icon-button
             (click)="changeEdit()">
@@ -20,7 +20,7 @@
         <div class="row"
              [ngClass]="{'row-end': tale.lastBookmark === null}">
             @if (tale.lastBookmark) {
-            <button mat-raised-button
+            <button mat-flat-button
                     color="primary">
                 <mat-icon>bookmark_border</mat-icon>
                 Continuar

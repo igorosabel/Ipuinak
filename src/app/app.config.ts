@@ -8,8 +8,8 @@ import {
 
 import { provideHttpClient } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { routes } from '@app/app.routes';
-import { provideCore } from '@app/pages/core';
+import routes from '@app/app.routes';
+import provideCore from '@app/pages/core';
 
 const scrollConfig: InMemoryScrollingOptions = {
   scrollPositionRestoration: 'top',
@@ -18,7 +18,7 @@ const scrollConfig: InMemoryScrollingOptions = {
 const inMemoryScrollingFeature: InMemoryScrollingFeature =
   withInMemoryScrolling(scrollConfig);
 
-export const appConfig: ApplicationConfig = {
+const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes, inMemoryScrollingFeature),
     provideHttpClient(),
@@ -26,3 +26,4 @@ export const appConfig: ApplicationConfig = {
     provideCore(),
   ],
 };
+export default appConfig;

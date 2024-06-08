@@ -1,5 +1,5 @@
 <div class="modal-bg"
-     [ngClass]="{'show': show}">
+     [ngClass]="{'show': show()}">
     <mat-card class="modal-box">
         <mat-card-header>
             <mat-card-title>
@@ -17,7 +17,7 @@
                 <mat-tab label="General">
                     <div class="image"
                          [ngStyle]="{'background-color': page.bgColorHash}">
-                        <button mat-raised-button
+                        <button mat-flat-button
                                 color="primary"
                                 (click)="addImage()">
                             <mat-icon>add_a_photo</mat-icon>
@@ -98,7 +98,7 @@
                         </div>
                         }
                         <div class="dialog-options">
-                            <button mat-raised-button
+                            <button mat-flat-button
                                     color="primary"
                                     (click)="addDialog()">
                                 <mat-icon>add</mat-icon>
@@ -112,13 +112,13 @@
         </mat-card-content>
         <mat-card-actions [ngClass]="{'actions-between': page.id !== null, 'actions-end': page.id === null}">
             @if (page.id) {
-            <button mat-raised-button
+            <button mat-flat-button
                     color="warn">
                 <mat-icon>delete_forever</mat-icon>
                 Borrar página
             </button>
             }
-            <button mat-raised-button
+            <button mat-flat-button
                     color="primary">
                 <mat-icon>save</mat-icon>
                 Guardar página

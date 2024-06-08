@@ -1,5 +1,5 @@
 import { A11yModule } from '@angular/cdk/a11y';
-import { Component } from '@angular/core';
+import { Component, WritableSignal, inject, signal } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import {
   MatDialogActions,
@@ -20,10 +20,10 @@ import {
     MatButton,
   ],
 })
-export class AlertDialogComponent {
-  public title: string = '';
-  public content: string = '';
-  public ok: string = 'Continuar';
+export default class AlertDialogComponent {
+  public dialogRef: MatDialogRef<AlertDialogComponent> = inject(MatDialogRef);
 
-  constructor(public dialogRef: MatDialogRef<AlertDialogComponent>) {}
+  public title: WritableSignal<string> = signal<string>('');
+  public content: WritableSignal<string> = signal<string>('');
+  public ok: WritableSignal<string> = signal<string>('Continuar');
 }

@@ -1,5 +1,5 @@
 <div class="modal-bg"
-     [ngClass]="{'show': show}">
+     [ngClass]="{'show': show()}">
     <mat-card class="modal-box">
         <mat-card-header>
             <mat-card-title>
@@ -14,7 +14,7 @@
         </mat-card-header>
         <mat-card-content>
             <div class="image">
-                <button mat-raised-button
+                <button mat-flat-button
                         color="primary"
                         (click)="addImage()">
                     <mat-icon>add_a_photo</mat-icon>
@@ -52,13 +52,13 @@
         </mat-card-content>
         <mat-card-actions [ngClass]="{'actions-between': character.id !== null, 'actions-end': character.id === null}">
             @if (character.id) {
-            <button mat-raised-button
+            <button mat-flat-button
                     color="warn">
                 <mat-icon>delete_forever</mat-icon>
                 Borrar personaje
             </button>
             }
-            <button mat-raised-button
+            <button mat-flat-button
                     color="primary"
                     (click)="saveCharacter()">
                 <mat-icon>save</mat-icon>

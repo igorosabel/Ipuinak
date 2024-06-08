@@ -3,15 +3,15 @@ import { CharacterInterface } from '@interfaces/character.interfaces';
 import { DialogInterface } from '@interfaces/dialog.interfaces';
 import { PageInterface } from '@interfaces/page.interfaces';
 import { TaleInterface } from '@interfaces/tale.interfaces';
-import { Character } from '@model/character.model';
-import { Dialog } from '@model/dialog.model';
-import { Page } from '@model/page.model';
-import { Tale } from '@model/tale.model';
+import Character from '@model/character.model';
+import Dialog from '@model/dialog.model';
+import Page from '@model/page.model';
+import Tale from '@model/tale.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ClassMapperService {
+export default class ClassMapperService {
   getDialog(d: DialogInterface): Dialog {
     return new Dialog().fromInterface(d);
   }

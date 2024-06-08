@@ -1,7 +1,7 @@
 import { BookmarkInterface } from '@interfaces/tale.interfaces';
 import { urldecode, urlencode } from '@osumi/tools';
 
-export class Bookmark {
+export default class Bookmark {
   constructor(
     public id: number | null = null,
     public idTale: number | null = null,

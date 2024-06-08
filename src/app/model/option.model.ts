@@ -1,7 +1,7 @@
 import { OptionInterface } from '@interfaces/page.interfaces';
 import { urldecode, urlencode } from '@osumi/tools';
 
-export class Option {
+export default class Option {
   constructor(
     public id: number | null = null,
     public idPage: number | null = null,

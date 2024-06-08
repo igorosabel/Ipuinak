@@ -1,12 +1,12 @@
 import { CharacterInterface } from '@interfaces/character.interfaces';
 import { PageInterface } from '@interfaces/page.interfaces';
 import { TaleInterface } from '@interfaces/tale.interfaces';
-import { Bookmark } from '@model/bookmark.model';
-import { Character } from '@model/character.model';
-import { Page } from '@model/page.model';
+import Bookmark from '@model/bookmark.model';
+import Character from '@model/character.model';
+import Page from '@model/page.model';
 import { urldecode, urlencode } from '@osumi/tools';
 
-export class Tale {
+export default class Tale {
   constructor(
     public id: number | null = null,
     public name: string | null = null,

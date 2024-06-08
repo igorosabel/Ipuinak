@@ -1,7 +1,7 @@
 import { DialogInterface } from '@interfaces/dialog.interfaces';
 import { urldecode, urlencode } from '@osumi/tools';
 
-export class Dialog {
+export default class Dialog {
   constructor(
     public id: number | null = null,
     public idPage: number | null = null,

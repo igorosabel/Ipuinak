@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { environment } from '@env/environment';
 import {
   CharacterInterface,
@@ -11,16 +11,17 @@ import {
   TaleResult,
   TalesResult,
 } from '@interfaces/tale.interfaces';
-import { Character } from '@model/character.model';
-import { Tale } from '@model/tale.model';
-import { ClassMapperService } from '@services/class-mapper.service';
+import Character from '@model/character.model';
+import Tale from '@model/tale.model';
+import ClassMapperService from '@services/class-mapper.service';
 import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ApiService {
-  constructor(private http: HttpClient, private cms: ClassMapperService) {}
+export default class ApiService {
+  private http: HttpClient = inject(HttpClient);
+  private cms: ClassMapperService = inject(ClassMapperService);
 
   getTales(): Observable<Tale[]> {
     return this.http

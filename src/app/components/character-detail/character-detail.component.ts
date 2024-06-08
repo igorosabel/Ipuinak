@@ -4,7 +4,10 @@ import {
   ElementRef,
   OutputEmitterRef,
   Signal,
+  WritableSignal,
+  inject,
   output,
+  signal,
   viewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -24,10 +27,10 @@ import {
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
 import { StatusResult } from '@interfaces/interfaces';
-import { Character } from '@model/character.model';
-import { Tale } from '@model/tale.model';
-import { ApiService } from '@services/api.service';
-import { DialogService } from '@services/dialog.service';
+import Character from '@model/character.model';
+import Tale from '@model/tale.model';
+import ApiService from '@services/api.service';
+import DialogService from '@services/dialog.service';
 
 @Component({
   standalone: true,
@@ -52,8 +55,11 @@ import { DialogService } from '@services/dialog.service';
     MatPrefix,
   ],
 })
-export class CharacterDetailComponent {
-  show: boolean = false;
+export default class CharacterDetailComponent {
+  private as: ApiService = inject(ApiService);
+  private ds: DialogService = inject(DialogService);
+
+  show: WritableSignal<boolean> = signal<boolean>(false);
   tale: Tale = new Tale();
   character: Character = new Character();
   characterName: Signal<ElementRef> =
@@ -61,16 +67,14 @@ export class CharacterDetailComponent {
 
   characterSaveEvent: OutputEmitterRef<boolean> = output<boolean>();
 
-  constructor(private as: ApiService, private ds: DialogService) {}
-
   openDetail(character: Character, tale: Tale): void {
-    this.show = true;
+    this.show.set(true);
     this.tale = tale;
     this.character = character;
   }
 
   close(): void {
-    this.show = false;
+    this.show.update((value: boolean): boolean => !value);
   }
 
   addImage(): void {

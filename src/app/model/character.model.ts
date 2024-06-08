@@ -2,7 +2,7 @@ import { environment } from '@env/environment';
 import { CharacterInterface } from '@interfaces/character.interfaces';
 import { urldecode, urlencode } from '@osumi/tools';
 
-export class Character {
+export default class Character {
   data: string | null = null;
 
   constructor(

@@ -1,10 +1,10 @@
 import { environment } from '@env/environment';
 import { DialogInterface } from '@interfaces/dialog.interfaces';
 import { OptionInterface, PageInterface } from '@interfaces/page.interfaces';
-import { Dialog } from '@model/dialog.model';
-import { Option } from '@model/option.model';
+import Dialog from '@model/dialog.model';
+import Option from '@model/option.model';
 
-export class Page {
+export default class Page {
   constructor(
     public id: number | null = null,
     public idTale: number | null = null,

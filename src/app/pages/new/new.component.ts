@@ -1,4 +1,10 @@
-import { Component, ElementRef, Signal, viewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Signal,
+  inject,
+  viewChild,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatIconButton } from '@angular/material/button';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
@@ -7,9 +13,9 @@ import { MatInput } from '@angular/material/input';
 import { MatToolbar } from '@angular/material/toolbar';
 import { Router, RouterLink } from '@angular/router';
 import { StatusIdResult } from '@interfaces/interfaces';
-import { Tale } from '@model/tale.model';
-import { ApiService } from '@services/api.service';
-import { DialogService } from '@services/dialog.service';
+import Tale from '@model/tale.model';
+import ApiService from '@services/api.service';
+import DialogService from '@services/dialog.service';
 
 @Component({
   standalone: true,
@@ -29,14 +35,14 @@ import { DialogService } from '@services/dialog.service';
   providers: [DialogService],
 })
 export default class NewComponent {
+  private as: ApiService = inject(ApiService);
+  private ds: DialogService = inject(DialogService);
+  private router: Router = inject(Router);
+
   name: Signal<ElementRef> = viewChild.required<ElementRef>('name');
   tale: Tale = new Tale();
 
-  constructor(
-    private as: ApiService,
-    private ds: DialogService,
-    private router: Router
-  ) {
+  constructor() {
     this.tale.name = 'Nuevo cuento';
   }
 

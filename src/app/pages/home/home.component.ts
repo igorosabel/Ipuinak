@@ -1,5 +1,5 @@
 import { AsyncPipe, NgClass } from '@angular/common';
-import { Component, WritableSignal, signal } from '@angular/core';
+import { Component, WritableSignal, inject, signal } from '@angular/core';
 import {
   MatButton,
   MatFabButton,
@@ -14,8 +14,8 @@ import {
 import { MatIcon } from '@angular/material/icon';
 import { MatToolbar } from '@angular/material/toolbar';
 import { RouterLink } from '@angular/router';
-import { Tale } from '@model/tale.model';
-import { ApiService } from '@services/api.service';
+import Tale from '@model/tale.model';
+import ApiService from '@services/api.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -38,11 +38,13 @@ import { Observable } from 'rxjs';
     MatCardContent,
   ],
 })
-export class HomeComponent {
+export default class HomeComponent {
+  private as: ApiService = inject(ApiService);
+
   tales$: Observable<Tale[]>;
   edit: WritableSignal<boolean> = signal<boolean>(false);
 
-  constructor(private as: ApiService) {
+  constructor() {
     this.tales$ = this.as.getTales();
   }
 
