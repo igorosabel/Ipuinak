@@ -23,8 +23,8 @@ import { StatusIdResult } from '@interfaces/interfaces';
 import Character from '@model/character.model';
 import Page from '@model/page.model';
 import Tale from '@model/tale.model';
+import { DialogService } from '@osumi/angular-tools';
 import ApiService from '@services/api.service';
-import DialogService from '@services/dialog.service';
 
 @Component({
   selector: 'app-edit',

@@ -29,8 +29,8 @@ import { MatInput } from '@angular/material/input';
 import { StatusResult } from '@interfaces/interfaces';
 import Character from '@model/character.model';
 import Tale from '@model/tale.model';
+import { DialogService } from '@osumi/angular-tools';
 import ApiService from '@services/api.service';
-import DialogService from '@services/dialog.service';
 
 @Component({
   selector: 'app-character-detail',

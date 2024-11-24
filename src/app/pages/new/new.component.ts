@@ -14,8 +14,8 @@ import { MatToolbar } from '@angular/material/toolbar';
 import { Router, RouterLink } from '@angular/router';
 import { StatusIdResult } from '@interfaces/interfaces';
 import Tale from '@model/tale.model';
+import { DialogService } from '@osumi/angular-tools';
 import ApiService from '@services/api.service';
-import DialogService from '@services/dialog.service';
 
 @Component({
   selector: 'app-new',

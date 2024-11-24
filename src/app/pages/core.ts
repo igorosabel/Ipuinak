@@ -5,7 +5,6 @@ import {
 } from '@angular/material/form-field';
 import ApiService from '@services/api.service';
 import ClassMapperService from '@services/class-mapper.service';
-import DialogService from '@services/dialog.service';
 
 const appearance: MatFormFieldDefaultOptions = {
   appearance: 'outline',
@@ -18,7 +17,6 @@ export default function provideCore(): Provider[] {
       useValue: appearance,
     },
     ApiService,
-    DialogService,
     ClassMapperService,
   ];
 }
