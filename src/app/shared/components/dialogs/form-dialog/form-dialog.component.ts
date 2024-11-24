@@ -14,7 +14,6 @@ import { MatInput } from '@angular/material/input';
 import { DialogField } from '@interfaces/dialog.interfaces';
 
 @Component({
-  standalone: true,
   selector: 'app-form-dialog',
   templateUrl: './form-dialog.component.html',
   imports: [

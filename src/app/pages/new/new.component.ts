@@ -18,7 +18,6 @@ import ApiService from '@services/api.service';
 import DialogService from '@services/dialog.service';
 
 @Component({
-  standalone: true,
   selector: 'app-new',
   templateUrl: './new.component.html',
   styleUrls: ['./new.component.scss'],

@@ -1,4 +1,4 @@
-import { NgClass, NgStyle } from '@angular/common';
+import { NgClass } from '@angular/common';
 import {
   Component,
   ElementRef,
@@ -33,13 +33,11 @@ import ApiService from '@services/api.service';
 import DialogService from '@services/dialog.service';
 
 @Component({
-  standalone: true,
   selector: 'app-character-detail',
   templateUrl: './character-detail.component.html',
   styleUrls: ['./character-detail.component.scss'],
   imports: [
     NgClass,
-    NgStyle,
     FormsModule,
     MatCard,
     MatCardHeader,

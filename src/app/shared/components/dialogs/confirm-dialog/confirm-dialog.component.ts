@@ -9,7 +9,6 @@ import {
 } from '@angular/material/dialog';
 
 @Component({
-  standalone: true,
   selector: 'app-confirm-dialog',
   templateUrl: './confirm-dialog.component.html',
   imports: [

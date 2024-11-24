@@ -25,7 +25,6 @@ import Page from '@model/page.model';
 import Tale from '@model/tale.model';
 
 @Component({
-  standalone: true,
   selector: 'app-page-detail',
   templateUrl: './page-detail.component.html',
   styleUrls: ['./page-detail.component.scss'],

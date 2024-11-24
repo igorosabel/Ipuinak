@@ -9,7 +9,6 @@ import {
 } from '@angular/material/dialog';
 
 @Component({
-  standalone: true,
   selector: 'app-alert-dialog',
   templateUrl: './alert-dialog.component.html',
   imports: [

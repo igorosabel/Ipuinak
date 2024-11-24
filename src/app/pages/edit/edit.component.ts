@@ -27,7 +27,6 @@ import ApiService from '@services/api.service';
 import DialogService from '@services/dialog.service';
 
 @Component({
-  standalone: true,
   selector: 'app-edit',
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.scss'],
