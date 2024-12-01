@@ -1,5 +1,5 @@
 <div class="modal-bg"
-     [ngClass]="{'show': show()}">
+     [class]="{'show': show()}">
     <mat-card class="modal-box">
         <mat-card-header>
             <mat-card-title>
@@ -50,7 +50,7 @@
                 </mat-form-field>
             </div>
         </mat-card-content>
-        <mat-card-actions [ngClass]="{'actions-between': character.id !== null, 'actions-end': character.id === null}">
+        <mat-card-actions [class]="{'actions-between': character.id !== null, 'actions-end': character.id === null}">
             @if (character.id) {
             <button mat-flat-button
                     color="warn">

@@ -1,5 +1,5 @@
 <div class="modal-bg"
-     [ngClass]="{'show': show()}">
+     [class]="{'show': show()}">
     <mat-card class="modal-box">
         <mat-card-header>
             <mat-card-title>
@@ -16,7 +16,7 @@
             <mat-tab-group>
                 <mat-tab label="General">
                     <div class="image"
-                         [ngStyle]="{'background-color': page.bgColorHash}">
+                         [style]="{'background-color': page.bgColorHash}">
                         <button mat-flat-button
                                 color="primary"
                                 (click)="addImage()">
@@ -110,7 +110,7 @@
                 <mat-tab label="Siguiente página"> Content 3 </mat-tab>
             </mat-tab-group>
         </mat-card-content>
-        <mat-card-actions [ngClass]="{'actions-between': page.id !== null, 'actions-end': page.id === null}">
+        <mat-card-actions [class]="{'actions-between': page.id !== null, 'actions-end': page.id === null}">
             @if (page.id) {
             <button mat-flat-button
                     color="warn">

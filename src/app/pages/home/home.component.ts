@@ -1,4 +1,4 @@
-import { AsyncPipe, NgClass } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, WritableSignal, inject, signal } from '@angular/core';
 import {
   MatButton,
@@ -23,7 +23,6 @@ import { Observable } from 'rxjs';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   imports: [
-    NgClass,
     AsyncPipe,
     RouterLink,
     MatToolbar,

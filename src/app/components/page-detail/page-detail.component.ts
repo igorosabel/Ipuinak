@@ -1,4 +1,3 @@
-import { NgClass, NgStyle } from '@angular/common';
 import { Component, WritableSignal, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButton, MatIconButton } from '@angular/material/button';
@@ -29,8 +28,6 @@ import Tale from '@model/tale.model';
   templateUrl: './page-detail.component.html',
   styleUrls: ['./page-detail.component.scss'],
   imports: [
-    NgClass,
-    NgStyle,
     FormsModule,
     MatCard,
     MatCardHeader,

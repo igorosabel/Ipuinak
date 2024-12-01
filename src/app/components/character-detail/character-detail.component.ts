@@ -1,4 +1,3 @@
-import { NgClass } from '@angular/common';
 import {
   Component,
   ElementRef,
@@ -37,7 +36,6 @@ import ApiService from '@services/api.service';
   templateUrl: './character-detail.component.html',
   styleUrls: ['./character-detail.component.scss'],
   imports: [
-    NgClass,
     FormsModule,
     MatCard,
     MatCardHeader,

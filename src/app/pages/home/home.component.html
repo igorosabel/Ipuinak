@@ -18,7 +18,7 @@
     </mat-card-header>
     <mat-card-content>
         <div class="row"
-             [ngClass]="{'row-end': tale.lastBookmark === null}">
+             [class]="{'row-end': tale.lastBookmark === null}">
             @if (tale.lastBookmark) {
             <button mat-flat-button
                     color="primary">

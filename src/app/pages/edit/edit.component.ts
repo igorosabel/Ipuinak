@@ -1,4 +1,3 @@
-import { NgStyle } from '@angular/common';
 import {
   Component,
   ElementRef,
@@ -31,7 +30,6 @@ import ApiService from '@services/api.service';
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.scss'],
   imports: [
-    NgStyle,
     RouterLink,
     PageDetailComponent,
     CharacterDetailComponent,
