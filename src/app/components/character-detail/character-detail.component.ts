@@ -83,14 +83,14 @@ export default class CharacterDetailComponent {
 
   onImageChange(ev: Event): void {
     const reader: FileReader = new FileReader();
-    const files: FileList | null = (<HTMLInputElement>ev.target).files;
+    const files: FileList | null = (ev.target as HTMLInputElement).files;
     if (files !== null && files.length > 0) {
       const file = files[0];
       reader.readAsDataURL(file);
       reader.onload = (): void => {
         this.character.data = reader.result as string;
         this.character.hasImage = true;
-        (<HTMLInputElement>document.getElementById('character-file')).value =
+        (document.getElementById('character-file') as HTMLInputElement).value =
           '';
       };
     }
