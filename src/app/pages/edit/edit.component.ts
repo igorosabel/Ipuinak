@@ -1,10 +1,13 @@
 import {
   Component,
   ElementRef,
+  InputSignalWithTransform,
   OnInit,
   Signal,
   WritableSignal,
   inject,
+  input,
+  numberAttribute,
   signal,
   viewChild,
 } from '@angular/core';
@@ -15,7 +18,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
 import { MatTab, MatTabGroup } from '@angular/material/tabs';
 import { MatToolbar } from '@angular/material/toolbar';
-import { ActivatedRoute, Params, RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import CharacterDetailComponent from '@components/character-detail/character-detail.component';
 import PageDetailComponent from '@components/page-detail/page-detail.component';
 import { StatusIdResult } from '@interfaces/interfaces';
@@ -51,6 +54,9 @@ export default class EditComponent implements OnInit {
   private as: ApiService = inject(ApiService);
   private ds: DialogService = inject(DialogService);
 
+  id: InputSignalWithTransform<number, unknown> = input.required({
+    transform: numberAttribute,
+  });
   name: Signal<ElementRef> = viewChild.required<ElementRef>('name');
   pageDetail: Signal<PageDetailComponent> =
     viewChild.required<PageDetailComponent>('pageDetail');
@@ -61,11 +67,8 @@ export default class EditComponent implements OnInit {
   selectedTab: number = 0;
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe((params: Params): void => {
-      const id: number = params['id'];
-      this.as.getTale(id).subscribe((result: Tale): void => {
-        this.tale = result;
-      });
+    this.as.getTale(this.id()).subscribe((result: Tale): void => {
+      this.tale = result;
     });
   }
 
