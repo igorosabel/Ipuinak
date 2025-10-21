@@ -11,7 +11,7 @@
     </button>
 </mat-toolbar>
 
-@for (tale of tales$ | async; track tale.id) {
+@for (tale of tales(); track tale.id) {
 <mat-card class="tale">
     <mat-card-header>
         <mat-card-title>{{tale.name}}</mat-card-title>

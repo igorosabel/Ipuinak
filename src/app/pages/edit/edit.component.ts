@@ -18,7 +18,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
 import { MatTab, MatTabGroup } from '@angular/material/tabs';
 import { MatToolbar } from '@angular/material/toolbar';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import CharacterDetailComponent from '@components/character-detail/character-detail.component';
 import PageDetailComponent from '@components/page-detail/page-detail.component';
 import { StatusIdResult } from '@interfaces/interfaces';
@@ -50,7 +50,6 @@ import ApiService from '@services/api.service';
   providers: [DialogService],
 })
 export default class EditComponent implements OnInit {
-  private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   private as: ApiService = inject(ApiService);
   private ds: DialogService = inject(DialogService);
 
@@ -86,9 +85,8 @@ export default class EditComponent implements OnInit {
       return;
     }
 
-    this.as
-      .saveTale(this.tale.toInterface())
-      .subscribe((result: StatusIdResult): void => {
+    this.as.saveTale(this.tale.toInterface()).subscribe({
+      next: (result: StatusIdResult): void => {
         if (result.status === 'ok') {
           this.taleSaved.set(true);
           window.setTimeout((): void => {
@@ -96,16 +94,24 @@ export default class EditComponent implements OnInit {
           }, 3000);
         }
         if (result.status === 'error') {
-          this.ds
-            .alert({
-              title: 'ERROR',
-              content: 'Ha ocurrido un error al guardar el cuento.',
-              ok: 'Continuar',
-            })
-            .subscribe((): void => {
-              this.name().nativeElement.focus();
-            });
+          this.saveTaleError();
         }
+      },
+      error: (): void => {
+        this.saveTaleError();
+      },
+    });
+  }
+
+  saveTaleError(): void {
+    this.ds
+      .alert({
+        title: 'ERROR',
+        content: 'Ha ocurrido un error al guardar el cuento.',
+        ok: 'Continuar',
+      })
+      .subscribe((): void => {
+        this.name().nativeElement.focus();
       });
   }
 

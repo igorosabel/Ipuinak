@@ -1,4 +1,3 @@
-import { AsyncPipe } from '@angular/common';
 import { Component, WritableSignal, inject, signal } from '@angular/core';
 import {
   MatButton,
@@ -16,14 +15,12 @@ import { MatToolbar } from '@angular/material/toolbar';
 import { RouterLink } from '@angular/router';
 import Tale from '@model/tale.model';
 import ApiService from '@services/api.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   imports: [
-    AsyncPipe,
     RouterLink,
     MatToolbar,
     MatIconButton,
@@ -39,11 +36,13 @@ import { Observable } from 'rxjs';
 export default class HomeComponent {
   private as: ApiService = inject(ApiService);
 
-  tales$: Observable<Tale[]>;
+  tales: WritableSignal<Tale[]> = signal<Tale[]>([]);
   edit: WritableSignal<boolean> = signal<boolean>(false);
 
   constructor() {
-    this.tales$ = this.as.getTales();
+    this.as.getTales().subscribe((tales: Tale[]): void => {
+      this.tales.set(tales);
+    });
   }
 
   changeEdit(): void {

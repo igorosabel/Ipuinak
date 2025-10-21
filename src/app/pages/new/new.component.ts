@@ -59,22 +59,29 @@ export default class NewComponent {
       return;
     }
 
-    this.as
-      .saveTale(this.tale.toInterface())
-      .subscribe((result: StatusIdResult): void => {
+    this.as.saveTale(this.tale.toInterface()).subscribe({
+      next: (result: StatusIdResult): void => {
         if (result.status === 'ok') {
           this.router.navigate(['/edit/' + result.id]);
         } else {
-          this.ds
-            .alert({
-              title: 'ERROR',
-              content: 'Ha ocurrido un error al guardar el cuento.',
-              ok: 'Continuar',
-            })
-            .subscribe((): void => {
-              this.name().nativeElement.focus();
-            });
+          this.saveError();
         }
+      },
+      error: (): void => {
+        this.saveError();
+      },
+    });
+  }
+
+  saveError(): void {
+    this.ds
+      .alert({
+        title: 'ERROR',
+        content: 'Ha ocurrido un error al guardar el cuento.',
+        ok: 'Continuar',
+      })
+      .subscribe((): void => {
+        this.name().nativeElement.focus();
       });
   }
 }
