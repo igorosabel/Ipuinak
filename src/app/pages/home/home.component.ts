@@ -1,15 +1,6 @@
 import { Component, WritableSignal, inject, signal } from '@angular/core';
-import {
-  MatButton,
-  MatFabButton,
-  MatIconButton,
-} from '@angular/material/button';
-import {
-  MatCard,
-  MatCardContent,
-  MatCardHeader,
-  MatCardTitle,
-} from '@angular/material/card';
+import { MatButton, MatFabButton, MatIconButton } from '@angular/material/button';
+import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
 import { MatToolbar } from '@angular/material/toolbar';
 import { RouterLink } from '@angular/router';

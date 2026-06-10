@@ -1,8 +1,9 @@
+import { provideHttpClient } from '@angular/common/http';
+import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
 import {
-  ApplicationConfig,
-  provideBrowserGlobalErrorListeners,
-  provideZonelessChangeDetection,
-} from '@angular/core';
+  MAT_FORM_FIELD_DEFAULT_OPTIONS,
+  MatFormFieldDefaultOptions,
+} from '@angular/material/form-field';
 import {
   InMemoryScrollingOptions,
   provideRouter,
@@ -10,26 +11,30 @@ import {
   withInMemoryScrolling,
   withViewTransitions,
 } from '@angular/router';
-
-import { provideHttpClient } from '@angular/common/http';
 import routes from '@app/app.routes';
-import provideCore from '@app/pages/core';
+import provideCore from '@pages/core';
 
 const scrollConfig: InMemoryScrollingOptions = {
   scrollPositionRestoration: 'top',
   anchorScrolling: 'enabled',
 };
+const appearance: MatFormFieldDefaultOptions = {
+  appearance: 'outline',
+};
 
 const appConfig: ApplicationConfig = {
   providers: [
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: appearance,
+    },
     provideRouter(
       routes,
       withInMemoryScrolling(scrollConfig),
       withViewTransitions(),
-      withComponentInputBinding()
+      withComponentInputBinding(),
     ),
     provideBrowserGlobalErrorListeners(),
-    provideZonelessChangeDetection(),
     provideHttpClient(),
     provideCore(),
   ],

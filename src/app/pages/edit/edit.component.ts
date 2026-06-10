@@ -57,8 +57,7 @@ export default class EditComponent implements OnInit {
     transform: numberAttribute,
   });
   name: Signal<ElementRef> = viewChild.required<ElementRef>('name');
-  pageDetail: Signal<PageDetailComponent> =
-    viewChild.required<PageDetailComponent>('pageDetail');
+  pageDetail: Signal<PageDetailComponent> = viewChild.required<PageDetailComponent>('pageDetail');
   characterDetail: Signal<CharacterDetailComponent> =
     viewChild.required<CharacterDetailComponent>('characterDetail');
   tale: Tale = new Tale();
@@ -133,12 +132,10 @@ export default class EditComponent implements OnInit {
 
   characterSaved(ev: boolean): void {
     if (ev && this.tale.id !== null) {
-      this.as
-        .getCharacters(this.tale.id)
-        .subscribe((result: Character[]): void => {
-          this.tale.characters = result;
-          this.characterDetail().close();
-        });
+      this.as.getCharacters(this.tale.id).subscribe((result: Character[]): void => {
+        this.tale.characters = result;
+        this.characterDetail().close();
+      });
     }
   }
 }

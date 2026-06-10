@@ -18,11 +18,7 @@ import {
   MatCardHeader,
   MatCardTitle,
 } from '@angular/material/card';
-import {
-  MatFormField,
-  MatLabel,
-  MatPrefix,
-} from '@angular/material/form-field';
+import { MatFormField, MatLabel, MatPrefix } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
 import { StatusResult } from '@interfaces/interfaces';
@@ -58,8 +54,7 @@ export default class CharacterDetailComponent {
   show: WritableSignal<boolean> = signal<boolean>(false);
   tale: Tale = new Tale();
   character: Character = new Character();
-  characterName: Signal<ElementRef> =
-    viewChild.required<ElementRef>('characterName');
+  characterName: Signal<ElementRef> = viewChild.required<ElementRef>('characterName');
 
   characterSaveEvent: OutputEmitterRef<boolean> = output<boolean>();
 
@@ -74,8 +69,7 @@ export default class CharacterDetailComponent {
   }
 
   addImage(): void {
-    const imageFile: HTMLElement | null =
-      document.getElementById('character-file');
+    const imageFile: HTMLElement | null = document.getElementById('character-file');
     if (imageFile !== null) {
       imageFile.click();
     }
@@ -90,8 +84,7 @@ export default class CharacterDetailComponent {
       reader.onload = (): void => {
         this.character.data = reader.result as string;
         this.character.hasImage = true;
-        (document.getElementById('character-file') as HTMLInputElement).value =
-          '';
+        (document.getElementById('character-file') as HTMLInputElement).value = '';
       };
     }
   }
@@ -108,22 +101,20 @@ export default class CharacterDetailComponent {
           this.characterName().nativeElement.focus();
         });
     }
-    this.as
-      .saveCharacter(this.character.toInterface())
-      .subscribe((result: StatusResult): void => {
-        if (result.status === 'ok') {
-          this.characterSaveEvent.emit(true);
-        } else {
-          this.ds
-            .alert({
-              title: 'ERROR',
-              content: 'Ocurrió un error al guardar el personaje.',
-              ok: 'Continuar',
-            })
-            .subscribe((): void => {
-              this.characterName().nativeElement.focus();
-            });
-        }
-      });
+    this.as.saveCharacter(this.character.toInterface()).subscribe((result: StatusResult): void => {
+      if (result.status === 'ok') {
+        this.characterSaveEvent.emit(true);
+      } else {
+        this.ds
+          .alert({
+            title: 'ERROR',
+            content: 'Ocurrió un error al guardar el personaje.',
+            ok: 'Continuar',
+          })
+          .subscribe((): void => {
+            this.characterName().nativeElement.focus();
+          });
+      }
+    });
   }
 }

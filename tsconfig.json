@@ -1,7 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "rootDir": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -18,14 +18,13 @@
     "target": "ES2022",
     "module": "ES2022",
     "paths": {
-      "@app/*": ["src/app/*"],
-      "@shared/*": ["src/app/shared/*"],
-      "@env/*": ["src/environments/*"],
-      "@components/*": ["src/app/components/*"],
-      "@services/*": ["src/app/services/*"],
-      "@interfaces/*": ["src/app/interfaces/*"],
-      "@model/*": ["src/app/model/*"],
-      "@pages/*": ["src/app/pages/*"]
+      "@app/*": ["./src/app/*"],
+      "@env/*": ["./src/environments/*"],
+      "@components/*": ["./src/app/components/*"],
+      "@interfaces/*": ["./src/app/interfaces/*"],
+      "@model/*": ["./src/app/model/*"],
+      "@pages/*": ["./src/app/pages/*"],
+      "@services/*": ["./src/app/services/*"]
     }
   },
   "angularCompilerOptions": {

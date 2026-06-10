@@ -1,10 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  Signal,
-  inject,
-  viewChild,
-} from '@angular/core';
+import { Component, ElementRef, Signal, inject, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatIconButton } from '@angular/material/button';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
